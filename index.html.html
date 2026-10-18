@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ไปด้วยกัน - เที่ยวไทย เงินถึงมือคนไทย</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbfbfd;--card:#fff;--text:#1d1d1f;--muted:#6e6e73;--line:#e5e5ea;--blue:#0071e3;--blue2:#e8f1fd;--glass:rgba(251,251,253,.78);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--card:#1c1c1e;--text:#f5f5f7;--muted:#a1a1a6;--line:#2c2c2e;--blue:#2997ff;--blue2:#10233a;--glass:rgba(0,0,0,.72);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#000;--card:#1c1c1e;--text:#f5f5f7;--muted:#a1a1a6;--line:#2c2c2e;--blue:#2997ff;--blue2:#10233a;--glass:rgba(0,0,0,.72);color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,"SF Pro Display","Sarabun","Noto Sans Thai","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:8px}
+/* NAV */
+header{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px);background:var(--glass);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
+.bar{max-width:1080px;margin:0 auto;height:52px;display:flex;align-items:center;gap:8px;padding:0 18px}
+.logo{font-weight:800;font-size:19px;letter-spacing:-.02em;text-decoration:none;margin-right:auto}
+.menu{display:flex;gap:4px}
+.menu a{text-decoration:none;font-size:14px;padding:6px 12px;border-radius:99px;color:var(--muted);transition:.2s}
+.menu a:hover,.menu a.on{color:var(--text);background:var(--blue2)}
+.cta{background:var(--blue);color:#fff;border:0;border-radius:99px;padding:7px 16px;font-size:14px;font-weight:600;transition:transform .15s}
+.cta:active{transform:scale(.95)}
+.burger{display:none;background:none;border:0;width:40px;height:40px;font-size:22px}
+@media(max-width:760px){.burger{display:block}.cta.hd{display:none}.menu{position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 14px 14px;max-height:0;overflow:hidden;opacity:0;visibility:hidden;transition:.3s}.menu.open{max-height:340px;opacity:1;visibility:visible}.menu a{font-size:17px;padding:12px}}
+/* LANGUAGE + CURRENCY */
+.pref{display:flex;gap:6px;align-items:center}
+.pref select{-webkit-appearance:none;appearance:none;background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%238e8e93' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 10px center;color:var(--text);border:1px solid var(--line);border-radius:99px;padding:6px 28px 6px 12px;font:inherit;font-size:13px;font-weight:600;cursor:pointer;max-width:120px;transition:border-color .2s}
+.pref select:hover{border-color:var(--blue)}
+@media(max-width:760px){.bar{padding:0 12px;gap:6px}.logo{font-size:17px;white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}.pref select{font-size:12px;padding:6px 24px 6px 9px;background-position:right 8px center}}
+@media(max-width:480px){.tabs button{font-size:12px}}
+/* HERO */
+.hero{position:relative;min-height:100svh;display:grid;place-items:center;text-align:center;padding:110px 18px 150px;touch-action:pan-y;background:#050b1a;color:#f5f5f7;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;animation:drift 18s ease-in-out infinite alternate}
+.o1{width:480px;height:480px;background:#0a84ff;top:-120px;left:-100px}
+.o2{width:420px;height:420px;background:#14b8a6;bottom:-120px;right:-60px;animation-delay:-6s}
+.o3{width:300px;height:300px;background:#f59e0b;top:40%;left:55%;opacity:.3;animation-delay:-11s}
+@keyframes drift{to{transform:translate(70px,50px) scale(1.15)}}
+/* MORPH GALLERY (hero background) */
+.mg{position:absolute;inset:0;z-index:1}
+.mg canvas,.mg img{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;object-fit:cover}
+.mg canvas{opacity:0;transition:opacity .7s ease}
+.mg img{opacity:0;transition:opacity .9s ease}
+.mg::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(5,11,26,.62) 0,rgba(5,11,26,.30) 40%,rgba(5,11,26,.80) 100%)}
+.hero h1,.hero p.sub{text-shadow:0 2px 24px rgba(0,0,0,.45)}
+.mga{position:absolute;top:50%;z-index:4;width:44px;height:44px;margin-top:-22px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);color:#fff;display:grid;place-items:center;padding:0;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:background .2s}
+.mga:hover{background:rgba(255,255,255,.28)}
+.mga.prev{left:28px}.mga.next{right:28px}
+.mgt{position:absolute;left:50%;bottom:max(28px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:4;display:flex;gap:8px;list-style:none;margin:0;padding:0;max-width:calc(100% - 32px);overflow-x:auto}
+.mgt li[hidden]{display:none}
+.mgt button{display:block;padding:0;border:2px solid transparent;border-radius:9px;overflow:hidden;background:none;opacity:.55;transition:opacity .25s,border-color .25s}
+.mgt button:hover{opacity:.9}.mgt button.on{border-color:#fff;opacity:1}
+.mgt img{display:block;width:80px;height:50px;max-width:none;object-fit:cover}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media(max-width:860px){.mga,.mgt{display:none}.hero{padding-bottom:60px}}
+.hero>.hc{position:relative;z-index:3;max-width:920px;width:100%}
+.hero h1{margin:0 0 14px;font-size:clamp(36px,8vw,76px);line-height:1.08;font-weight:800;letter-spacing:-.03em;animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+.word{display:inline-block;min-width:3ch;transition:opacity .35s,transform .35s}
+.word.out{opacity:0;transform:translateY(14px)}
+.hero p.sub{margin:0 auto 32px;max-width:520px;font-size:clamp(16px,2.4vw,21px);color:#c7c7cc;animation:rise .9s .15s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(28px)}}
+/* SEARCH */
+.search{background:var(--glass);color:var(--text);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.18);border-radius:26px;padding:14px;text-align:left;box-shadow:0 30px 80px rgba(0,0,0,.45);animation:rise .9s .3s cubic-bezier(.2,.7,.2,1) both}
+.tabs{position:relative;display:flex;gap:2px;background:var(--line);border-radius:14px;padding:4px;margin-bottom:12px}
+.tabs button{flex:1;position:relative;z-index:1;background:none;border:0;padding:9px 2px;font-size:13px;font-weight:600;color:var(--muted);transition:color .25s}
+.tabs button.on{color:var(--text)}
+.ind{position:absolute;top:4px;bottom:4px;left:4px;background:var(--card);border-radius:11px;box-shadow:0 2px 8px rgba(0,0,0,.15);transition:transform .35s cubic-bezier(.3,.9,.3,1),width .35s}
+.fields{display:grid;gap:10px;grid-template-columns:1.6fr 1fr 1fr 1fr auto}
+.f{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 14px;transition:border-color .2s,box-shadow .2s}
+.f:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue2)}
+.f label{display:block;font-size:12px;color:var(--muted)}
+.f input,.f select{width:100%;border:0;background:none;color:var(--text);font:inherit;font-weight:600;padding:2px 0;outline:0}
+.go{background:var(--blue);color:#fff;border:0;border-radius:14px;padding:0 26px;font-weight:700;font-size:16px;min-height:56px;transition:transform .15s,filter .2s}
+.go:hover{filter:brightness(1.1)}.go:active{transform:scale(.96)}
+@media(max-width:860px){.fields{grid-template-columns:1fr 1fr}.f.dest{grid-column:1/-1}.go{grid-column:1/-1}}
+.err{color:#ff453a;font-size:13px;min-height:18px;margin:8px 4px 0}
+/* SECTIONS */
+section{max-width:1080px;margin:0 auto;padding:84px 18px 0}
+h2{margin:0 0 8px;font-size:clamp(28px,5vw,44px);letter-spacing:-.025em;line-height:1.15}
+.lead{color:var(--muted);margin:0 0 26px;font-size:18px;max-width:560px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:8px 18px;font-size:15px;transition:.2s}
+.chip:hover{border-color:var(--blue)}
+.chip.on{background:var(--text);color:var(--bg);border-color:var(--text)}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.dc{background:var(--card);border-radius:22px;overflow:hidden;border:1px solid var(--line);cursor:pointer;text-align:left;padding:0;display:block;width:100%;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s;animation:pop .45s both}
+.dc:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,.18)}
+@keyframes pop{from{opacity:0;transform:scale(.94)}}
+.sc{height:190px;position:relative;overflow:hidden;transition:.5s}
+.sc img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;opacity:0;transition:opacity .6s,transform .7s cubic-bezier(.2,.8,.2,1)}
+.sc img.ok{opacity:1}
+.dc:hover .sc img{transform:scale(1.06)}
+.sc::after{content:"";position:absolute;inset:auto 0 0 0;height:45%;background:linear-gradient(transparent,rgba(0,0,0,.28));pointer-events:none}
+.heart{z-index:2;position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.85);font-size:17px;color:#444;transition:transform .2s}
+.heart.on{color:#ff375f;animation:beat .4s}
+@keyframes beat{50%{transform:scale(1.35)}}
+.inf{padding:14px 16px 18px}
+.inf h3{margin:0;font-size:19px}
+.inf .m{display:flex;justify-content:space-between;align-items:baseline;margin-top:6px;color:var(--muted);font-size:14px}
+.inf b{color:var(--text);font-size:17px}
+.none{color:var(--muted);padding:30px 0}
+/* DEALS */
+.deals{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.dl{isolation:isolate;border-radius:26px;padding:28px;color:#fff;position:relative;overflow:hidden;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .35s}
+.dl:hover{transform:scale(1.02)}
+.dl h3{margin:0 0 4px;font-size:26px}.dl p{margin:0 0 14px;opacity:.9}
+.dl>img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;opacity:0;mix-blend-mode:multiply;transition:opacity .8s,transform .6s}
+.dl>img.ok{opacity:.85}
+.dl:hover>img{transform:scale(1.05)}
+.dl::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,.5));pointer-events:none}
+.dl>h3,.dl>p,.dl>.cd{position:relative;z-index:1}
+.dl>.cd{z-index:1}.cd{font-variant-numeric:tabular-nums;font-weight:700;background:rgba(0,0,0,.28);border-radius:99px;padding:5px 14px;display:inline-block;width:max-content}
+/* STATS */
+.stats{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));text-align:center}
+.st{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:30px 12px}
+.st b{display:block;font-size:clamp(34px,5vw,50px);letter-spacing:-.03em}
+.st span{color:var(--muted)}
+/* REVIEWS */
+.rv3{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.rv{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px;margin:0}
+.rv .s{color:#ff9f0a;letter-spacing:2px}.rv p{margin:8px 0 14px}.rv cite{color:var(--muted);font-style:normal;font-size:14px}
+/* APPS */
+.apps{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.ap{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;text-align:left;width:100%;transition:.25s}
+.ap:hover{border-color:var(--blue);transform:translateY(-3px)}
+.ap small{display:block;color:var(--muted)}
+footer{max-width:1080px;margin:90px auto 0;padding:30px 18px 40px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}
+footer nav{display:flex;gap:18px;flex-wrap:wrap}
+.pt{display:grid;gap:18px}
+.calc{display:grid;gap:12px;grid-template-columns:1fr 1fr 1.2fr}
+.res{background:var(--blue2);border-radius:18px;padding:14px 18px}
+.res span,.res small{display:block;color:var(--muted);font-size:13px}
+.res b{font-size:34px;color:var(--blue);letter-spacing:-.02em}
+.roles{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.role{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:2px}
+.role i{font-style:normal;font-size:30px}.role span{color:var(--muted);font-size:14px}
+.big2{justify-self:start;padding:12px 26px;font-size:16px}
+.md p.gp{color:var(--blue);font-weight:600;font-size:14px}
+@media(max-width:760px){.calc{grid-template-columns:1fr}}
+/* MODAL */
+.ov{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);display:grid;place-items:center;padding:18px;opacity:0;visibility:hidden;transition:.3s}
+.ov.show{opacity:1;visibility:visible}
+.md{background:var(--card);border-radius:26px;width:100%;max-width:460px;max-height:90svh;overflow:auto;transform:translateY(30px) scale(.95);transition:transform .4s cubic-bezier(.2,.9,.2,1)}
+.ov.show .md{transform:none}
+.md .sc{height:230px}
+.md .bd{padding:22px}
+.md h3{margin:0 0 6px;font-size:28px}.md p{color:var(--muted);margin:0 0 16px}
+.x{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.85);color:#222;font-size:18px;z-index:2}
+.md .ap{margin-bottom:10px}
+#toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 24px);transform:translate(-50%,30px);background:var(--text);color:var(--bg);padding:11px 20px;border-radius:99px;font-size:14px;opacity:0;transition:.3s;z-index:200;pointer-events:none}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+.rvl{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s cubic-bezier(.2,.7,.2,1)}
+.rvl.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rvl{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+<style>
+:root{--ink:#102d39;--teal:#087e80;--soft:#eff7f5;--line2:#d8e5e3;--alert:#a84624;--round:18px}
+.pro-section{max-width:1200px;margin:0 auto;padding:64px 28px;color:var(--text,var(--ink))}.pro-section h2{font-size:clamp(26px,4vw,38px);letter-spacing:-1px;margin:8px 0 12px}.pro-section h3{margin:0 0 10px;font-size:21px}.eyebrow{font-size:11px;letter-spacing:2.5px;font-weight:750;color:var(--teal)}.section-title{display:flex;justify-content:space-between;align-items:center;gap:24px}.pill{display:inline-block;font-size:12px;color:var(--teal);border:1px solid #b6d8d2;padding:7px 12px;border-radius:30px;background:#f2faf7}.notice{padding:15px 18px;background:#fff3df;color:#774914;border-radius:12px;font-size:14px;line-height:1.7;margin:20px 0}.tint{background:var(--soft);border-radius:28px;margin-top:15px;margin-bottom:15px;color:var(--ink)}.tint .lead{color:#52686e}.pro-filters{display:grid;grid-template-columns:2fr 1.5fr 1fr 1fr;gap:12px}.pro-filters label,.pro-form label,.aform label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600}input,select,textarea,button{font:inherit}button,a,input,select,textarea,summary{touch-action:manipulation}button{cursor:pointer}.pro-filters input,.pro-filters select,.pro-form input,.pro-form select,.pro-form textarea,.aform input,.aform textarea,.aform select,.admin-search{border:1px solid var(--line2);background:#fff;color:var(--ink);border-radius:10px;padding:12px;min-width:0;width:100%;box-sizing:border-box}.pro-form textarea,.aform textarea{min-height:110px;resize:vertical}.pro-options{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin:14px 0 24px;font-size:13px}.pro-options label{display:flex;align-items:center;gap:8px}.service-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.service-card{background:var(--card,#fff);border:1px solid var(--line2);border-radius:var(--round);overflow:hidden;display:flex;flex-direction:column}.service-art{height:130px;position:relative;overflow:hidden;background:linear-gradient(125deg,#083e4f,#16a394);display:flex;align-items:center;justify-content:space-between;padding:24px;color:white}.service-art>span{font-size:52px}.service-art small{font-size:11px;letter-spacing:2px}.service-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.service-copy{padding:22px;display:flex;flex-direction:column;flex:1;gap:12px}.service-copy p{margin:0;font-size:14px;color:var(--muted,#556b70);line-height:1.7}.service-price{font-size:25px;font-weight:750;color:var(--teal)}.service-price small{font-size:12px;font-weight:400}.service-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}.btn{border:0;background:var(--teal);color:#fff;border-radius:10px;padding:11px 17px;font-weight:650;display:inline-block;text-decoration:none}.btn:hover{filter:brightness(.93)}.btn:disabled{opacity:.5;cursor:wait}.btn.subtle{color:var(--teal);background:#e8f3ef}.btn.danger{background:#a63838}.split{display:grid;grid-template-columns:1fr 1fr;gap:55px}.pro-form{display:grid;gap:14px}.pro-form .checkline,.aform .checkline{display:flex;flex-direction:row;align-items:flex-start;font-weight:400;font-size:13px}.checkline input{width:auto;flex:none;margin-top:4px}.link{border:0;background:none;padding:0;color:var(--teal);text-decoration:underline;font:inherit}.pro-section details{border-bottom:1px solid var(--line2);padding:16px 0}.pro-section summary{cursor:pointer;font-weight:650}.pro-section details p{line-height:1.8}.pro-section details .pro-form{padding:24px 0}.pro-dialog{width:min(700px,calc(100% - 28px));max-height:90dvh;overflow:auto;border:0;border-radius:22px;padding:30px;color:var(--ink);background:#fff;box-sizing:border-box}.pro-dialog::backdrop{background:#062d3ab8;backdrop-filter:blur(5px)}.dialog-close{float:right;border:0;border-radius:50%;width:35px;height:35px;font-size:24px;background:#eff5f3;color:var(--ink)}.pro-dialog h2{font-size:26px;margin:12px 0}.pro-dialog p{line-height:1.8}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.price-box{padding:18px;background:var(--soft);border:1px solid #c4ded6;border-radius:12px;white-space:pre-line}.error{color:#b33d29}.success{color:#09654f}.plan-row{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:15px 0;border-bottom:1px solid #c9dcd6}.plan-row:last-child{margin-bottom:20px}#track-result{white-space:pre-line;line-height:1.9}.policy-copy{white-space:pre-line}.empty{grid-column:1/-1;padding:26px;border:1px dashed #b1cbc4;border-radius:14px;color:#58706c}input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #eba448;outline-offset:3px}
+/* Administration */
+.admin-page{margin:0;background:#f3f6f8;color:var(--ink);font:15px/1.65 system-ui,-apple-system,'Segoe UI',sans-serif}.admin-page *{box-sizing:border-box}.login-shell{min-height:100dvh;display:grid;grid-template-columns:1fr 1fr}.login-story{background:linear-gradient(140deg,#0b2c3c,#08696a);color:white;padding:12vh 8vw;display:flex;flex-direction:column;justify-content:center}.login-story h1{font-size:clamp(36px,5vw,66px);line-height:1.15;letter-spacing:-2px;margin:28px 0}.login-story p{color:#b7d7d5;max-width:380px}.brand-mark{font-size:20px;font-weight:750;letter-spacing:1px}.login-area{display:flex;align-items:center;justify-content:center;padding:35px}.login-card{max-width:390px;width:100%}.login-card h2{font-size:30px;margin:0 0 8px}.login-card .aform{margin:28px 0}.aform{display:grid;gap:16px}.admin-layout{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100dvh}.aside{background:#0c2d3b;color:#d5e6e6;padding:28px 18px;position:sticky;top:0;height:100dvh;overflow:auto}.aside .brand-mark{padding:0 12px 25px;color:white}.aside button{width:100%;border:0;background:none;color:inherit;text-align:left;border-radius:10px;padding:12px 15px;margin:2px 0;font-size:14px}.aside button.active{background:#17515a;color:#fff;border-left:3px solid #e6aa58}.aside a{display:block;color:#b7d7d5;padding:25px 15px;text-decoration:none}.admin-main{min-width:0;padding:0 34px 50px}.admin-top{display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:92px;border-bottom:1px solid #dce4e7;margin-bottom:30px}.admin-top h2{margin:0;font-size:24px}.admin-top small{color:#627a83}.admin-top>div:last-child{display:flex;align-items:center;gap:12px}.admin-intro{background:linear-gradient(120deg,#0d5360,#0b7d7d);color:white;padding:30px;border-radius:20px;margin-bottom:24px;display:flex;justify-content:space-between;gap:20px;align-items:center}.admin-intro h3{font-size:28px;line-height:1.3;margin:8px 0}.admin-intro p{color:#c6e4e0;margin:0}.admin-intro .eyebrow{color:#a1d7cc}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:26px}.metric{padding:22px;border:1px solid #dce7e8;border-radius:16px;background:white}.metric b{display:block;font-size:32px;margin:8px 0;color:#0b6268}.metric span{font-size:12px;color:#6b7f86}.table-card{background:white;border:1px solid #dce7e8;border-radius:16px;padding:20px;overflow:auto}.table-tools{display:flex;gap:12px;justify-content:space-between;align-items:center;margin-bottom:18px}.admin-search{max-width:350px}table{border-collapse:collapse;width:100%;font-size:13px;white-space:normal}th{text-align:left;color:#617880;background:#f4f8f8;font-size:12px}th,td{padding:13px 12px;border-bottom:1px solid #e7eeee;vertical-align:top}td{max-width:300px;overflow-wrap:anywhere}td .btn{padding:6px 10px;font-size:12px;margin:2px}.tag{display:inline-block;padding:3px 9px;border-radius:20px;background:#edf5f3;color:#0d7264;font-size:12px}.admin-page .pro-dialog{max-width:750px}.admin-page .help-note{font-size:13px;color:#657b82}.admin-page .form-result{white-space:pre-line}.admin-page [hidden]{display:none!important}.admin-mobile-nav{display:none}.small-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:22px}.small-stats article{padding:20px;border-radius:15px;background:#fff;border:1px solid #dae5e5}.small-stats b{font-size:24px;display:block}.preserve{white-space:pre-line}.muted{color:#647b82}.admin-footer{font-size:12px;color:#6b8189;margin-top:20px}
+@media(max-width:1000px){.service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pro-filters{grid-template-columns:1fr 1fr}.admin-layout{grid-template-columns:190px minmax(0,1fr)}.metrics{grid-template-columns:repeat(2,1fr)}.admin-main{padding:0 20px 40px}.aside{padding:20px 10px}.aside .brand-mark{font-size:17px}.small-stats{grid-template-columns:1fr}}
+@media(max-width:650px){.pro-section{padding:42px 20px}.section-title{display:block}.section-title .pill{margin-bottom:10px}.split{grid-template-columns:1fr;gap:28px}.service-grid{grid-template-columns:1fr}.pro-filters{grid-template-columns:1fr 1fr}.pro-filters label{font-size:11px}.form-row{grid-template-columns:1fr}.pro-dialog{padding:23px}.login-shell{grid-template-columns:1fr}.login-story{padding:30px}.login-story h1{font-size:30px;letter-spacing:-1px}.login-story p{display:none}.login-area{padding:32px 24px}.admin-layout{display:block}.aside{position:static;width:100%;height:auto;padding:15px}.aside .brand-mark{padding:0 5px 10px}.aside nav{display:flex;overflow:auto}.aside button{width:auto;white-space:nowrap;padding:8px 12px}.aside a{display:none}.admin-main{padding:0 15px 30px}.admin-top{min-height:90px;flex-wrap:wrap;padding:15px 0;gap:10px}.admin-top h2{font-size:21px}.admin-intro{padding:22px}.admin-intro h3{font-size:24px}.metrics{gap:10px}.metric{padding:16px}.metric b{font-size:27px}.table-card{padding:12px}.table-tools{flex-wrap:wrap}table{min-width:650px}}
+@media(prefers-color-scheme:dark){.tint{background:#122e31;color:#e5f3ee}.tint .lead{color:#b6c9c4}.tint .service-card{background:#18383a}.tint .service-copy p{color:#b6c9c4}}
+@media print{header,footer,.hero,#places,#deals,#apps,#services,#tracking,#journal,#help,#reviews,.btn,.pro-options{display:none!important}#planner{display:block;background:#fff;color:#000}.pro-section{padding:20px}}
+
+</style>
+<meta name="description" content="ไปด้วยกัน บริการท่องเที่ยว ที่พัก กิจกรรม รถเช่า รถรับส่ง และทริปพร้อมไกด์ ส่งคำขอและติดตามการจองได้ในที่เดียว">
+</head>
+<body>
+<header>
+  <div class="bar">
+    <a class="logo" href="#top" data-i="logo">ไปด้วยกัน</a>
+    <nav class="menu" id="menu">
+      <a href="#search" data-i="n_search">ค้นหา</a><a href="#places" data-i="n_places">จุดหมาย</a><a href="#deals" data-i="n_deals">ดีล</a><a href="#apps" data-i="n_apps">เรียกรถ</a><a href="#services">บริการทั้งหมด</a><a href="#tracking">ติดตามคำขอ</a>
+    </nav>
+    <div class="pref">
+      <select id="lang" autocomplete="off" data-ia="langlbl" aria-label="ภาษา"><option value="th" selected>ไทย</option><option value="zh">中文</option><option value="en">English</option></select>
+      <select id="cur" autocomplete="off" data-ia="curlbl" aria-label="สกุลเงิน"></select>
+    </div>
+    <button class="cta hd" data-go="#search" data-i="cta">เริ่มจองเลย</button>
+    <button class="burger" id="burger" data-ia="burger" aria-label="เปิดเมนู" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main id="top">
+<div class="hero">
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="mg" id="mg" aria-hidden="true"><canvas id="mgc"></canvas></div>
+  <button class="mga prev" id="mgp" type="button" data-ia="prev" aria-label="ภาพก่อนหน้า"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg></button>
+  <button class="mga next" id="mgn" type="button" data-ia="next" aria-label="ภาพถัดไป"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
+  <ul class="mgt" id="mgt" data-ia="mgt" aria-label="เลือกภาพบรรยากาศ"></ul>
+  <span class="sr" id="mgl" aria-live="polite"></span>
+  <div class="hc">
+    <h1><span data-i="h1a">ทริปต่อไปที่</span><span class="word" id="word">ภูเก็ต</span><br><span data-i="h1b">เงินถึงมือคนไทยจริง</span></h1>
+    <p class="sub" data-i="sub">ที่พัก เที่ยวบิน รถเช่า รถตู้ เรือ ครบในแอปเดียว โดยคนไทย GP ต่ำ ราคาดีกว่า</p>
+    <div class="search" id="search">
+      <div class="tabs" id="tabs" role="tablist">
+        <span class="ind" id="ind"></span>
+        <button class="on" data-t="hotel" data-i="tab_hotel">ที่พัก</button>
+        <button data-t="flight" data-i="tab_flight">เที่ยวบิน</button>
+        <button data-t="car" data-i="tab_car">รถเช่า</button>
+        <button data-t="bus" data-i="tab_bus">รถ/เรือ</button>
+        <button data-t="act" data-i="tab_act">กิจกรรม</button>
+      </div>
+      <div class="fields">
+        <div class="f dest"><label id="l1" for="q">จุดหมาย</label><input id="q" list="dl" placeholder="เช่น ภูเก็ต, เชียงใหม่" autocomplete="off"><datalist id="dl"></datalist></div>
+        <div class="f"><label id="l2" for="d1">เช็กอิน</label><input type="date" id="d1"></div>
+        <div class="f"><label id="l3" for="d2">เช็กเอาต์</label><input type="date" id="d2"></div>
+        <div class="f"><label for="g" data-i="travelers">ผู้เดินทาง</label><select id="g"><option value="1">1 คน</option><option value="2" selected>2 คน</option><option value="3">3 คน</option><option value="4">4 คน</option><option value="5">5 คนขึ้นไป</option></select></div>
+        <button class="go" id="sb" data-i="sb">ค้นหา</button>
+      </div>
+      <div class="err" id="err" role="alert"></div>
+    </div>
+  </div>
+</div>
+
+<section id="places">
+  <div class="rvl"><h2 data-i="places_h">จุดหมายยอดนิยม</h2><p class="lead" data-i="places_lead">ที่พักอิสระและผู้ให้บริการท้องถิ่น เลือกตามสไตล์แล้วกดดูได้เลย</p></div>
+  <div class="chips" id="chips">
+    <button class="chip on" data-c="all" data-i="c_all">ทั้งหมด</button><button class="chip" data-c="sea" data-i="c_sea">ทะเล</button><button class="chip" data-c="mt" data-i="c_mt">ภูเขา</button><button class="chip" data-c="city" data-i="c_city">เมือง</button><button class="chip" data-c="fav" data-i="c_fav">ที่ถูกใจ</button>
+  </div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section id="deals">
+  <div class="rvl"><h2 data-i="deals_h">ดีลไทยด้วยกัน</h2><p class="lead" data-i="deals_lead">ราคาดี และเงินถึงมือคนไทยด้วยกัน (ตัวอย่าง)</p></div>
+  <div class="deals rvl" id="managed-deals"><p>กำลังโหลดประกาศ…</p></div>
+</section>
+
+<section id="apps">
+  <div class="rvl"><h2 data-i="apps_h">ต่อยอดการเดินทาง</h2><p class="lead" data-i="apps_lead">เปิดแอปในเครื่อง ถ้าไม่มีจะเปิดเว็บแทน · ดีลพิเศษผ่านเรา เร็วๆ นี้</p></div>
+  <div class="apps rvl" id="apps-box"></div>
+</section>
+
+<section id="services" class="pro-section">
+ <div class="eyebrow">EVERY JOURNEY, TOGETHER</div><div class="section-title"><div><h2 id="service-headline">บริการสำหรับทุกจังหวะของทริป</h2><p id="service-intro" class="lead">เลือกบริการ ดูรายละเอียด แล้วส่งคำขอให้ทีมงานยืนยัน</p></div><span class="pill">ราคา THB • ไม่รับบัตรผ่านเว็บ</span></div>
+ <p id="site-notice" class="notice">กำลังเชื่อมต่อระบบบริการ…</p>
+ <div class="pro-filters"><label>จุดหมาย<input id="service-query" placeholder="จังหวัดหรือชื่อบริการ"></label><label>ประเภท<select id="service-category"><option value="">ทุกบริการ</option><option value="hotel">ที่พัก</option><option value="flight">เที่ยวบิน (รับคำปรึกษา)</option><option value="car">รถเช่า</option><option value="bus">รถ / เรือ</option><option value="act">กิจกรรม</option><option value="transfer">รับส่งสนามบิน</option><option value="guide">ไกด์ท้องถิ่น</option><option value="package">แพ็กเกจทัวร์</option></select></label><label>งบต่อหน่วยไม่เกิน (บาท)<input id="service-budget" type="number" min="0" placeholder="ไม่จำกัด"></label><label>เรียงตาม<select id="service-sort"><option value="featured">แนะนำ</option><option value="low">ราคาต่ำไปสูง</option><option value="high">ราคาสูงไปต่ำ</option></select></label></div>
+ <div class="pro-options"><label><input type="checkbox" id="filter-family"> เหมาะกับครอบครัว</label><label><input type="checkbox" id="filter-access"> รองรับผู้มีข้อจำกัดการเคลื่อนไหว</label><button type="button" id="clear-filters" class="btn subtle">ล้างตัวกรอง</button></div>
+ <div id="service-results" class="service-grid" aria-live="polite"></div>
+</section>
+<section id="planner" class="pro-section tint"><div class="eyebrow">YOUR LITTLE TRAVEL PLAN</div><h2>เก็บไอเดียทริปของคุณ</h2><p class="lead">กด “เพิ่มในแผน” จากบริการที่สนใจ แผนเก็บในอุปกรณ์นี้และยังไม่ใช่การจอง</p><div id="plan-items"></div><button type="button" class="btn" id="print-plan">พิมพ์ / บันทึกแผนเป็น PDF</button></section>
+<section id="tracking" class="pro-section"><div class="split"><div><div class="eyebrow">BOOKING DESK</div><h2>ติดตามคำขอของคุณ</h2><p class="lead">ใช้เลขคำขอและรหัสลับที่ได้รับหลังส่งแบบฟอร์ม</p><p>รหัสลับใช้ดูสถานะได้ กรุณาเก็บไว้และไม่ส่งต่อให้บุคคลอื่น</p></div><form id="track-form" class="pro-form"><label>เลขคำขอ<input name="reference" required placeholder="PDK-…" maxlength="40"></label><label>รหัสลับติดตาม<input name="access_token" type="password" required maxlength="100" autocomplete="off"></label><button class="btn">ดูสถานะ</button><div id="track-result" role="status"></div></form></div></section>
+<section id="journal" class="pro-section tint"><div class="eyebrow">BEFORE YOU GO</div><h2>คู่มือเดินทาง & ข่าวสาร</h2><div id="article-list" class="service-grid"></div></section>
+<section id="help" class="pro-section"><div class="split"><div><div class="eyebrow">WE'RE HERE TO HELP</div><h2>คำถามที่พบบ่อย</h2><div id="faq-list"></div><p id="contact-details"></p></div><form id="contact-form" class="pro-form"><h3>ติดต่อ / ขอใบเสนอราคา</h3><label>ชื่อ<input name="name" required maxlength="100" autocomplete="name"></label><label>อีเมล<input name="email" type="email" required maxlength="150" autocomplete="email"></label><label>ข้อความ<textarea name="message" required maxlength="3000" placeholder="บริการที่สนใจ วันเดินทาง จำนวนคน และสิ่งที่ต้องการเป็นพิเศษ"></textarea></label><label class="checkline"><input name="consent" type="checkbox" required> ยอมรับการใช้ข้อมูลเพื่อติดต่อกลับตาม <button type="button" class="link" data-policy="privacy">นโยบายข้อมูล</button></label><button class="btn">ส่งข้อความ</button><p class="form-result" role="status"></p></form></div></section>
+<section id="reviews" class="pro-section tint"><div class="eyebrow">TRAVELLER VOICES</div><h2>รีวิวจากผู้เดินทาง</h2><div id="review-list" class="service-grid"></div><details><summary>เขียนรีวิวหลังเดินทาง</summary><form id="review-form" class="pro-form"><label>เลขคำขอ<input name="reference" required maxlength="40"></label><label>รหัสลับติดตาม<input name="access_token" type="password" required maxlength="100" autocomplete="off"></label><label>คะแนน<select name="rating"><option value="5">5 — ประทับใจมาก</option><option value="4">4 — ดี</option><option value="3">3 — ปานกลาง</option><option value="2">2 — ควรปรับปรุง</option><option value="1">1 — ไม่ประทับใจ</option></select></label><label>ความคิดเห็น<textarea name="text" required maxlength="2000"></textarea></label><label class="checkline"><input name="consent" type="checkbox" required> ยินยอมเผยแพร่ชื่อแรกและรีวิวหลังตรวจสอบ</label><button class="btn">ส่งรีวิว</button><p class="form-result" role="status"></p></form></details></section>
+<dialog id="booking-dialog" class="pro-dialog"><button type="button" class="dialog-close" aria-label="ปิด">×</button><div id="booking-body"></div></dialog>
+<dialog id="policy-dialog" class="pro-dialog"><button type="button" class="dialog-close" aria-label="ปิด">×</button><div id="policy-body"></div></dialog>
+
+</main>
+
+<footer>
+  <span data-i="foot">© 2026 ไปด้วยกัน · แพลตฟอร์มโดยคนไทย</span>
+  <nav><a href="#places" data-i="n_places">จุดหมาย</a><a href="#deals" data-i="n_deals">ดีล</a><a href="#top" data-i="f_top">กลับด้านบน ↑</a></nav>
+  <span style="flex-basis:100%;font-size:12px" data-i="foot_note">อัตราแลกเปลี่ยนเป็นค่าประมาณเพื่อการอ้างอิงเท่านั้น</span>
+<nav><button class="link" data-policy="terms">เงื่อนไขบริการ</button><button class="link" data-policy="privacy">นโยบายข้อมูล</button><button class="link" data-policy="cancel">การยกเลิก</button><a href="admin">สำหรับผู้ดูแล</a></nav></footer>
+
+<div class="ov" id="ov" aria-hidden="true"><div class="md" id="md" role="dialog" aria-modal="true"></div></div>
+
+<div id="toast"></div>
+
+<script>
+const D=[
+{id:"phuket",t:"sea",p:2490,r:4.8,g:"linear-gradient(160deg,#38bdf8,#0d9488)",n:{th:"ภูเก็ต",zh:"普吉岛",en:"Phuket"},d:{th:"หาดป่าตอง เมืองเก่า และเกาะรอบๆ เหมาะกับพักผ่อนริมทะเล",zh:"芭东海滩、老城区和周边岛屿，适合海边度假",en:"Patong Beach, the old town and nearby islands. Perfect for a seaside break."}},
+{id:"chiangmai",t:"mt",p:1590,r:4.7,g:"linear-gradient(160deg,#6ee7b7,#047857)",n:{th:"เชียงใหม่",zh:"清迈",en:"Chiang Mai"},d:{th:"ดอยสุเทพ คาเฟ่ และวัดเก่าแก่ อากาศดีเกือบทั้งปี",zh:"素贴山、咖啡馆和古老寺庙，全年气候宜人",en:"Doi Suthep, cafés and ancient temples, with pleasant weather most of the year."}},
+{id:"bangkok",t:"city",p:1890,r:4.6,g:"linear-gradient(160deg,#a78bfa,#4338ca)",n:{th:"กรุงเทพฯ",zh:"曼谷",en:"Bangkok"},d:{th:"วัดพระแก้ว ตลาดน้ำ สตรีทฟู้ด และช้อปปิ้งครบทุกสไตล์",zh:"玉佛寺、水上市场、街头美食与购物，应有尽有",en:"The Grand Palace, floating markets, street food and shopping for every style."}},
+{id:"krabi",t:"sea",p:2190,r:4.8,g:"linear-gradient(160deg,#67e8f9,#0369a1)",n:{th:"กระบี่",zh:"甲米",en:"Krabi"},d:{th:"อ่าวนาง ไร่เลย์ และทะเลแหวก น้ำใสสุดๆ",zh:"奥南海滩、莱利海滩和分水海，海水清澈透亮",en:"Ao Nang, Railay and the Thale Waek sandbar, with crystal-clear water."}},
+{id:"samui",t:"sea",p:2890,r:4.7,g:"linear-gradient(160deg,#fde68a,#f97316)",n:{th:"เกาะสมุย",zh:"苏梅岛",en:"Koh Samui"},d:{th:"หาดเฉวง ชมพระอาทิตย์ตก และปาร์ตี้ริมหาด",zh:"查汶海滩、日落美景和海滩派对",en:"Chaweng Beach, sunsets and beachfront parties."}},
+{id:"chiangrai",t:"mt",p:1290,r:4.6,g:"linear-gradient(160deg,#bef264,#4d7c0f)",n:{th:"เชียงราย",zh:"清莱",en:"Chiang Rai"},d:{th:"วัดร่องขุ่น ไร่ชา และทะเลหมอกบนดอย",zh:"白庙（龙昆寺）、茶园与山间云海",en:"Wat Rong Khun, tea plantations and misty mountain views."}},
+{id:"pattaya",t:"city",p:1490,r:4.4,g:"linear-gradient(160deg,#f9a8d4,#be185d)",n:{th:"พัทยา",zh:"芭堤雅",en:"Pattaya"},d:{th:"ใกล้กรุงเทพฯ เกาะล้าน และกิจกรรมสนุกทั้งวัน",zh:"离曼谷很近，有大西岭（兰岛）和全天好玩的活动",en:"Close to Bangkok, with Koh Larn and fun activities all day."}},
+{id:"pai",t:"mt",p:990,r:4.5,g:"linear-gradient(160deg,#fdba74,#b45309)",n:{th:"ปาย",zh:"拜县",en:"Pai"},d:{th:"ถนนคนเดิน สะพานประวัติศาสตร์ และบรรยากาศชิลล์",zh:"步行街、历史悠久的桥和悠闲惬意的氛围",en:"Walking street, a historic bridge and a laid-back vibe."}}
+];
+const byId=id=>D.find(x=>x.id===id);
+
+/* ---------- place photos: Unsplash first, Wikipedia as fallback, gradient if both fail ---------- */
+const PH={
+phuket:{u:"photo-1579683670728-96c9abc7a088",w:"Phuket"},
+chiangmai:{u:"photo-1512553840337-276c0d80a43a",w:"Chiang Mai"},
+bangkok:{w:"Wat Arun"},
+krabi:{w:"Railay Beach"},
+samui:{w:"Ko Samui"},
+chiangrai:{u:"photo-1767273581757-9824b2cd106e",w:"Wat Rong Khun"},
+pattaya:{w:"Pattaya"},
+pai:{w:"Pai, Thailand"}
+};
+const usrc=id=>`https://images.unsplash.com/${id}?auto=format&fit=crop&w=900&q=70`;
+const wcache={};
+function wikiImg(t){
+  return wcache[t]||(wcache[t]=fetch(`https://en.wikipedia.org/w/api.php?action=query&redirects=1&titles=${encodeURIComponent(t)}&prop=pageimages&piprop=thumbnail&pithumbsize=900&format=json&origin=*`)
+    .then(r=>r.json()).then(j=>{const p=Object.values(j.query.pages)[0];return p&&p.thumbnail?p.thumbnail.source:null}).catch(()=>null));
+}
+function setPhoto(im,id){
+  const custom=byId(id);if(custom&&custom.image){im.src=custom.image;im.onerror=()=>im.remove();return;}
+  const p=PH[id];if(!p){im.remove();return}
+  const steps=[async()=>p.u?usrc(p.u):null,()=>wikiImg(p.w)];let i=0;
+  const run=async()=>{while(i<steps.length){const s=await steps[i++]();if(s){im.src=s;return}}im.remove()};
+  im.onload=()=>im.classList.add("ok");im.onerror=run;run();
+}
+function dealPhotos(){
+  $$(".dl[data-pl]").forEach(d=>{if(d.querySelector("img"))return;const im=new Image();im.alt="";im.decoding="async";d.insertBefore(im,d.firstChild);setPhoto(im,d.dataset.pl)});
+}
+
+
+/* ---------- language + currency ---------- */
+const LOCALE={th:"th-TH",zh:"zh-CN",en:"en-US"};
+/* r = units of that currency per 1 THB (approximate, for reference only) */
+const CUR={THB:{s:"฿",r:1},USD:{s:"US$",r:.0305},EUR:{s:"€",r:.0262},GBP:{s:"£",r:.0227},JPY:{s:"JP¥",r:4.65},CNY:{s:"CN¥",r:.2175},KRW:{s:"₩",r:43},HKD:{s:"HK$",r:.238},SGD:{s:"S$",r:.0395},AUD:{s:"A$",r:.0465},INR:{s:"₹",r:2.62}};
+let lang="th",cur="THB";
+function money(thb){const c=CUR[cur],v=thb*c.r,dec=v<20?2:0;return c.s+v.toLocaleString(LOCALE[lang],{minimumFractionDigits:dec,maximumFractionDigits:dec})}
+
+const I={
+th:{
+title:"ไปด้วยกัน - เที่ยวไทย เงินถึงมือคนไทย",logo:"ไปด้วยกัน",
+n_search:"ค้นหา",n_places:"จุดหมาย",n_deals:"ดีล",n_apps:"เรียกรถ",cta:"เริ่มจองเลย",burger:"เปิดเมนู",langlbl:"ภาษา",curlbl:"สกุลเงิน",
+prev:"ภาพก่อนหน้า",next:"ภาพถัดไป",mgt:"เลือกภาพบรรยากาศ",
+h1a:"ทริปต่อไปที่",h1b:"เงินถึงมือคนไทยจริง",sub:"ที่พัก เที่ยวบิน รถเช่า รถตู้ เรือ ครบในแอปเดียว โดยคนไทย GP ต่ำ ราคาดีกว่า",
+tab_hotel:"ที่พัก",tab_flight:"เที่ยวบิน",tab_car:"รถเช่า",tab_bus:"รถ/เรือ",tab_act:"กิจกรรม",
+tabs:{hotel:["จุดหมาย","เช็กอิน","เช็กเอาต์","เช่น ภูเก็ต, เชียงใหม่"],flight:["ปลายทาง","วันออกเดินทาง","วันกลับ","เช่น เชียงใหม่"],car:["สถานที่รับรถ","วันรับรถ","วันคืนรถ","เช่น สนามบินภูเก็ต"],bus:["เส้นทาง","วันเดินทาง","วันกลับ","เช่น กรุงเทพฯ → ปาย"],act:["เมือง/กิจกรรม","วันที่เริ่ม","วันที่สิ้นสุด","เช่น ดำน้ำ กระบี่"]},
+travelers:"ผู้เดินทาง",pax:n=>n+" คน",pax5:"5 คนขึ้นไป",sb:"ค้นหา",
+err_q:"กรุณาใส่จุดหมายก่อนค้นหา",err_d:"วันสิ้นสุดต้องไม่ก่อนวันเริ่มต้น",
+found:(n,q)=>`พบ ${n} จุดหมายสำหรับ "${q}"`,notfound:q=>`ไม่พบ "${q}" ในรายการแนะนำ`,
+places_h:"จุดหมายยอดนิยม",places_lead:"ที่พักอิสระและผู้ให้บริการท้องถิ่น เลือกตามสไตล์แล้วกดดูได้เลย",
+c_all:"ทั้งหมด",c_sea:"ทะเล",c_mt:"ภูเขา",c_city:"เมือง",c_fav:"ที่ถูกใจ",
+none:"ไม่พบจุดหมายที่ตรงกัน ลองเลือกหมวดอื่นหรือล้างคำค้นหา",
+card_price:p=>`เริ่ม <b class="pr" data-p="${p}">${money(p)}</b>/คืน`,fav_aria:"ถูกใจ",fav_added:n=>`เพิ่ม ${n} ในรายการที่ถูกใจ`,
+deals_h:"ดีลไทยด้วยกัน",deals_lead:"ราคาดี และเงินถึงมือคนไทยด้วยกัน (ตัวอย่าง)",
+d1t:"โฮมสเตย์ปาย ลด 20%",d1p:"จ่ายตรงถึงเจ้าของที่พัก",d2t:()=>`รถตู้ เชียงใหม่–ปาย ${money(150)}`,d2p:"ผู้ประกอบการท้องถิ่น",d3t:"เรียกรถ/สั่งอาหาร ถูกลง",d3p:"ดีลพิเศษเมื่อสั่งผ่านเรา (เร็วๆ นี้)",left:"เหลือ",
+apps_h:"ต่อยอดการเดินทาง",apps_lead:"เปิดแอปในเครื่อง ถ้าไม่มีจะเปิดเว็บแทน · ดีลพิเศษผ่านเรา เร็วๆ นี้",
+ap_grab:"เรียก Grab",ap_grab_d:"เปิดแอป Grab ในเครื่อง",ap_maps_d:"ดูแผนที่และนำทาง",ap_bolt_d:"เรียกรถอีกทางเลือก",ap_lm_d:"สั่งอาหาร ส่งพัสดุ",opening:t=>`กำลังเปิด ${t}...`,
+map_t:n=>`ดูแผนที่ ${n}`,map_d:"เปิด Google Maps",gp:"จองผ่านเรา เงินถึงเจ้าของที่พักโดยตรง",close:"ปิด",
+foot:"© 2026 ไปด้วยกัน · แพลตฟอร์มโดยคนไทย",f_top:"กลับด้านบน ↑",foot_note:"อัตราแลกเปลี่ยนเป็นค่าประมาณเพื่อการอ้างอิงเท่านั้น",
+gal_show:n=>`แสดงภาพที่ ${n}`,gal_of:(a,n)=>`ภาพที่ ${a} จาก ${n}`
+},
+zh:{
+title:"一起去 - 畅游泰国，收益直达泰国本地人",logo:"一起去",
+n_search:"搜索",n_places:"目的地",n_deals:"优惠",n_apps:"叫车",cta:"立即预订",burger:"打开菜单",langlbl:"语言",curlbl:"货币",
+prev:"上一张",next:"下一张",mgt:"选择风景图片",
+h1a:"下一站：",h1b:"收益真正直达泰国本地人",sub:"住宿、机票、租车、面包车、船票，一个应用全搞定。泰国人自己做的平台，佣金低，价格更划算",
+tab_hotel:"住宿",tab_flight:"机票",tab_car:"租车",tab_bus:"车/船",tab_act:"活动",
+tabs:{hotel:["目的地","入住","退房","例如：普吉岛、清迈"],flight:["目的地","出发日期","返程日期","例如：清迈"],car:["取车地点","取车日期","还车日期","例如：普吉机场"],bus:["路线","出行日期","返程日期","例如：曼谷 → 拜县"],act:["城市/活动","开始日期","结束日期","例如：甲米潜水"]},
+travelers:"出行人数",pax:n=>n+" 人",pax5:"5 人以上",sb:"搜索",
+err_q:"请先填写目的地再搜索",err_d:"结束日期不能早于开始日期",
+found:(n,q)=>`找到 ${n} 个与“${q}”相关的目的地`,notfound:q=>`推荐列表中没有“${q}”`,
+places_h:"热门目的地",places_lead:"独立住宿与本地服务商，按喜好挑选，点开即可查看",
+c_all:"全部",c_sea:"海边",c_mt:"山区",c_city:"城市",c_fav:"收藏",
+none:"没有找到匹配的目的地，试试其他分类或清除搜索",
+card_price:p=>`起价 <b class="pr" data-p="${p}">${money(p)}</b>/晚`,fav_aria:"收藏",fav_added:n=>`已将${n}加入收藏`,
+deals_h:"同行好价",deals_lead:"价格实惠，收益直达泰国人（示例）",
+d1t:"拜县民宿 8 折",d1p:"直接支付给房东",d2t:()=>`清迈–拜县面包车 ${money(150)}`,d2p:"本地运营商",d3t:"叫车/点餐更优惠",d3p:"通过我们下单享专属优惠（即将推出）",left:"剩余",
+apps_h:"延伸你的旅程",apps_lead:"优先打开手机应用，没有则打开网页 · 专属优惠即将推出",
+ap_grab:"叫 Grab",ap_grab_d:"打开手机上的 Grab 应用",ap_maps_d:"查看地图并导航",ap_bolt_d:"另一种叫车选择",ap_lm_d:"点餐、寄送包裹",opening:t=>`正在打开 ${t}…`,
+map_t:n=>`查看${n}地图`,map_d:"打开 Google Maps",gp:"通过我们预订，款项直达住宿主人",close:"关闭",
+foot:"© 2026 一起去 · 泰国人打造的平台",f_top:"回到顶部 ↑",foot_note:"汇率为估算值，仅供参考",
+gal_show:n=>`显示第 ${n} 张图片`,gal_of:(a,n)=>`第 ${a} 张，共 ${n} 张`
+},
+en:{
+title:"Pai Duay Gan - Travel Thailand, money that reaches Thai locals",logo:"Pai Duay Gan",
+n_search:"Search",n_places:"Destinations",n_deals:"Deals",n_apps:"Rides",cta:"Book now",burger:"Open menu",langlbl:"Language",curlbl:"Currency",
+prev:"Previous photo",next:"Next photo",mgt:"Choose a scenery photo",
+h1a:"Your next trip to ",h1b:"Money that truly reaches Thai locals",sub:"Stays, flights, car rentals, vans and boats in one app. Built by Thais, with low commission and better prices.",
+tab_hotel:"Stays",tab_flight:"Flights",tab_car:"Cars",tab_bus:"Transit",tab_act:"Tours",
+tabs:{hotel:["Destination","Check-in","Check-out","e.g. Phuket, Chiang Mai"],flight:["Destination","Departure","Return","e.g. Chiang Mai"],car:["Pick-up location","Pick-up date","Return date","e.g. Phuket Airport"],bus:["Route","Travel date","Return date","e.g. Bangkok → Pai"],act:["City / activity","Start date","End date","e.g. Diving in Krabi"]},
+travelers:"Travelers",pax:n=>n+(n==1?" guest":" guests"),pax5:"5+ guests",sb:"Search",
+err_q:"Please enter a destination first",err_d:"The end date can't be before the start date",
+found:(n,q)=>`Found ${n} destination${n>1?"s":""} for "${q}"`,notfound:q=>`"${q}" isn't in our recommended list`,
+places_h:"Popular destinations",places_lead:"Independent stays and local providers. Pick your style and tap to explore.",
+c_all:"All",c_sea:"Beach",c_mt:"Mountains",c_city:"City",c_fav:"Favorites",
+none:"No matching destinations. Try another category or clear your search.",
+card_price:p=>`From <b class="pr" data-p="${p}">${money(p)}</b>/night`,fav_aria:"Favorite",fav_added:n=>`${n} added to favorites`,
+deals_h:"Thai-together deals",deals_lead:"Great prices, and the money goes straight to Thai people (sample)",
+d1t:"Pai homestay 20% off",d1p:"Paid directly to the owner",d2t:()=>`Chiang Mai–Pai van ${money(150)}`,d2p:"Local operator",d3t:"Cheaper rides & food delivery",d3p:"Special deals when you order through us (coming soon)",left:"Time left",
+apps_h:"Continue your journey",apps_lead:"Opens the app on your phone, or the website if you don't have it · special deals coming soon",
+ap_grab:"Book a Grab",ap_grab_d:"Open the Grab app",ap_maps_d:"Maps and navigation",ap_bolt_d:"Another ride option",ap_lm_d:"Food delivery & parcels",opening:t=>`Opening ${t}...`,
+map_t:n=>`View ${n} on map`,map_d:"Open Google Maps",gp:"Book through us and your money goes straight to the host",close:"Close",
+foot:"© 2026 Pai Duay Gan · A platform by Thais",f_top:"Back to top ↑",foot_note:"Exchange rates are approximate and for reference only",
+gal_show:n=>`Show photo ${n}`,gal_of:(a,n)=>`Photo ${a} of ${n}`
+}};
+Object.assign(I.th,{h1b:'เริ่มต้นที่ไปด้วยกัน',sub:'สำรวจที่พัก กิจกรรม รถเช่า และบริการท่องเที่ยว ส่งคำขอให้ทีมงานดูแล',gp:'สำรวจจุดหมาย แล้วเลือกบริการจากรายการด้านล่าง',destination_hint:'ไอเดียจุดหมาย',deals_lead:'ประกาศและโปรโมชั่นจากทีมงาน',apps_lead:'เปิดบริการภายนอก เงื่อนไขและราคาเป็นของผู้ให้บริการนั้น'});
+Object.assign(I.en,{h1b:'begins together',sub:'Explore stays, activities, car rentals and local services. Request a trip with our team.',gp:'Explore the destination, then choose a service below.',destination_hint:'Destination idea',deals_lead:'Updates and offers from our team',apps_lead:'External services have their own prices and terms.'});
+Object.assign(I.zh,{h1b:'一起出发',sub:'探索住宿、活动、租车与当地服务，向团队提交旅行需求。',gp:'探索目的地，然后在下方选择服务。',destination_hint:'目的地灵感',deals_lead:'团队公告和优惠',apps_lead:'外部服务价格及条款由各服务商规定。'});
+const L=(k,...a)=>{const v=I[lang][k]??I.th[k];return typeof v==="function"?v(...a):v};
+const safeText=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const nm=x=>safeText(x.n[lang]||x.n.th),ds=x=>safeText(x.d[lang]||x.d.th);
+const match=(x,q)=>{q=q.toLowerCase();return Object.values(x.n).some(s=>s.toLowerCase().includes(q))};
+
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+let savedFav=[];try{savedFav=JSON.parse(localStorage.getItem('pdk-favorites')||'[]');if(!Array.isArray(savedFav))savedFav=[]}catch{};const fav=new Set(savedFav);let cat="all",kw="",tab="hotel",curX=null;
+const toast=m=>{const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove("show"),2400)};
+
+/* app launcher */
+function openApp(l){
+  if(!/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)){window.open(l.web,"_blank","noopener");return}
+  let left=false;const f=()=>{if(document.hidden)left=true};
+  document.addEventListener("visibilitychange",f);toast(L("opening",l.t));
+  location.href=l.app;
+  setTimeout(()=>{document.removeEventListener("visibilitychange",f);if(!left)window.open(l.web,"_blank","noopener")},1500);
+}
+function appBtn(l){const b=document.createElement("button");b.className="ap";b.innerHTML=`<span><b>${l.t}</b><small>${l.d}</small></span>`;b.onclick=()=>openApp(l);return b}
+const APPS=()=>[
+{t:L("ap_grab"),d:L("ap_grab_d"),app:"grab://open?screenType=BOOKING",web:"https://www.grab.com/th/"},
+{t:"Google Maps",d:L("ap_maps_d"),app:"comgooglemaps://",web:"https://maps.google.com"},
+{t:"Bolt",d:L("ap_bolt_d"),app:"bolt://",web:"https://bolt.eu/th-th/"},
+{t:"LINE MAN",d:L("ap_lm_d"),app:"lineman://",web:"https://lineman.line.me/"}];
+function renderApps(){const b=$("#apps-box");b.innerHTML="";APPS().forEach(a=>b.appendChild(appBtn(a)))}
+
+/* nav */
+const burger=$("#burger"),menu=$("#menu");
+burger.onclick=()=>{const o=menu.classList.toggle("open");burger.setAttribute("aria-expanded",o);burger.textContent=o?"✕":"☰"};
+menu.addEventListener("click",e=>{if(e.target.tagName==="A"){menu.classList.remove("open");burger.textContent="☰"}});
+$$("[data-go]").forEach(b=>b.onclick=()=>{$(b.dataset.go).scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>$("#q").focus({preventScroll:true}),600)});
+const secs=$$("section[id]");
+secs.forEach(s=>new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)$$(".menu a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+s.id))}),{rootMargin:"-45% 0px -50% 0px"}).observe(s));
+
+/* rotating word */
+const W=["phuket","chiangmai","krabi","samui","pai"],w=$("#word");let wi=0;
+const setWord=()=>{const x=byId(W[wi])||D[0];w.textContent=x?nm(x):''};
+setInterval(()=>{w.classList.add("out");setTimeout(()=>{wi=(wi+1)%W.length;setWord();w.classList.remove("out")},350)},2400);
+
+/* tabs */
+function setTab(){const t=L("tabs")[tab];$("#l1").textContent=t[0];$("#l2").textContent=t[1];$("#l3").textContent=t[2];$("#q").placeholder=t[3]}
+function moveInd(){const b=$(".tabs button.on"),i=$("#ind");i.style.width=b.offsetWidth+"px";i.style.transform=`translateX(${b.offsetLeft-4}px)`}
+$$(".tabs button").forEach(b=>b.onclick=()=>{$$(".tabs button").forEach(x=>x.classList.remove("on"));b.classList.add("on");tab=b.dataset.t;setTab();moveInd()});
+addEventListener("resize",moveInd);addEventListener("load",moveInd);setTimeout(moveInd,100);
+
+/* dates */
+const iso=d=>d.toISOString().slice(0,10),now=new Date(),d1=$("#d1"),d2=$("#d2");
+const add=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+d1.min=d2.min=iso(now);d1.value=iso(add(now,7));d2.value=iso(add(now,9));
+d1.onchange=()=>{d2.min=d1.value;if(d2.value<d1.value)d2.value=iso(add(new Date(d1.value),1))};
+
+/* destinations */
+function draw(){
+  const g=$("#grid");g.innerHTML="";
+  const list=D.filter(x=>(cat==="all"||(cat==="fav"?fav.has(x.id):x.t===cat))&&(!kw||match(x,kw)));
+  if(!list.length){g.innerHTML=`<p class="none">${L("none")}</p>`;return}
+  list.forEach((x,i)=>{
+    const c=document.createElement("div");c.className="dc";c.tabIndex=0;c.style.animationDelay=i*60+"ms";
+    c.innerHTML=`<div class="sc" style="background:${x.g}"><img alt="${nm(x)}" decoding="async" loading="lazy"><button class="heart ${fav.has(x.id)?"on":""}" aria-label="${L("fav_aria")} ${nm(x)}">${fav.has(x.id)?"♥":"♡"}</button></div><div class="inf"><h3>${nm(x)}</h3><div class="m"><span>${L("destination_hint")}</span><span>${L("card_price",x.p)}</span></div></div>`;
+    setPhoto(c.querySelector(".sc img"),x.id);
+    c.onclick=()=>openModal(x);c.onkeydown=e=>{if(e.key==="Enter")openModal(x)};
+    c.querySelector(".heart").onclick=e=>{e.stopPropagation();fav.has(x.id)?fav.delete(x.id):(fav.add(x.id),toast(L("fav_added",nm(x))));try{localStorage.setItem('pdk-favorites',JSON.stringify([...fav]))}catch{}draw()};
+    g.appendChild(c);
+  });
+}
+$$(".chip").forEach(b=>b.onclick=()=>{$$(".chip").forEach(x=>x.classList.remove("on"));b.classList.add("on");cat=b.dataset.c;draw()});
+
+/* search */
+$("#sb").onclick=()=>{document.dispatchEvent(new CustomEvent('travel-search',{detail:{destination:$("#q").value.trim(),category:tab,start:d1.value,end:d2.value,pax:$("#g").value}}));};
+$("#q").addEventListener("keydown",e=>{if(e.key==="Enter")$("#sb").click()});
+$("#q").addEventListener("input",e=>{if(!e.target.value&&kw){kw="";draw()}});
+
+/* modal */
+const ov=$("#ov"),md=$("#md");let last;
+function renderModal(x){
+  curX=x;
+  md.innerHTML=`<div class="sc" style="background:${x.g}"><img alt="${nm(x)}" decoding="async"><button class="x" aria-label="${L("close")}">✕</button></div><div class="bd"><h3>${nm(x)}</h3><p>${ds(x)}</p><p class="gp">${L("gp")}</p><div id="mb"></div></div>`;
+  setPhoto(md.querySelector(".sc img"),x.id);
+  const mb=md.querySelector("#mb"),A=APPS();
+  [{t:L("map_t",nm(x)),d:L("map_d"),app:"comgooglemaps://?q="+encodeURIComponent(x.n.en),web:"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(x.n.en+" Thailand")},A[0],A[2]].forEach(a=>mb.appendChild(appBtn(a)));
+  md.querySelector(".x").onclick=closeModal;
+}
+function openModal(x){
+  last=document.activeElement;renderModal(x);
+  ov.classList.add("show");ov.setAttribute("aria-hidden","false");md.querySelector(".x").focus();document.body.style.overflow="hidden";
+}
+function closeModal(){ov.classList.remove("show");ov.setAttribute("aria-hidden","true");document.body.style.overflow="";last&&last.focus&&last.focus()}
+ov.onclick=e=>{if(e.target===ov)closeModal()};
+addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+
+dealPhotos();
+document.querySelectorAll('.cd').forEach(e=>e.textContent='ดีลตัวอย่าง • สอบถามก่อนจอง');
+/* apply language / currency to the whole page */
+function i18n(){$$("[data-i]").forEach(e=>e.textContent=L(e.dataset.i))}
+function pax(){const s=$("#g"),v=s.value||"2";s.innerHTML=[1,2,3,4,5].map(n=>`<option value="${n}"${String(n)===v?" selected":""}>${n===5?L("pax5"):L("pax",n)}</option>`).join("")}
+function applyLang(){
+  document.documentElement.lang=lang;document.title=L("title");
+  i18n();
+  $$("[data-ia]").forEach(e=>e.setAttribute("aria-label",L(e.dataset.ia)));
+  pax();setTab();setWord();renderApps();draw();
+  $("#dl").innerHTML=D.map(x=>`<option value="${nm(x)}">`).join("");
+  $("#err").textContent="";
+  if(ov.classList.contains("show")&&curX){renderModal(curX);md.querySelector(".x").focus()}
+  moveInd();
+  document.dispatchEvent(new Event("langchange"));
+}
+function applyCur(){
+  i18n();                                   /* deal prices */
+  $$(".pr").forEach(b=>b.textContent=money(+b.dataset.p));  /* card prices (no re-animation) */
+}
+$("#cur").innerHTML=Object.keys(CUR).map(k=>`<option value="${k}">${CUR[k].s} ${k}</option>`).join("");
+$("#lang").value=lang;$("#cur").value=cur;
+$("#lang").onchange=e=>{lang=e.target.value;applyLang()};
+$("#cur").onchange=e=>{cur=e.target.value;applyCur()};
+applyLang();
+document.addEventListener("travel-cms",e=>{const {destinations,settings}=e.detail;D.splice(0,D.length,...destinations.filter(x=>x.active).map(x=>({id:x.slug,t:x.category,p:x.price/100,g:"linear-gradient(160deg,#38bdf8,#0d9488)",n:{th:x.name_th,en:x.name_en,zh:x.name_zh},d:{th:x.description_th,en:x.description_en,zh:x.description_zh},image:x.image})));W.splice(0,W.length,...D.map(x=>x.id));if(!W.length)W.push("");wi=0;applyLang();const brand=()=>{document.querySelector(".logo").textContent=settings.site_name;document.querySelector('[data-i="h1a"]').textContent=settings.hero_title||'ทริปต่อไปที่';document.querySelector('[data-i="h1b"]').textContent=settings.hero_tagline||'เริ่มต้นที่ไปด้วยกัน';document.querySelector('[data-i="sub"]').textContent=settings.hero_intro||'';document.querySelector("footer [data-i=foot]").textContent="© "+new Date().getFullYear()+" "+settings.site_name;};brand();for(const [id,key] of [['places','show_places'],['deals','show_deals'],['apps','show_apps']]){document.getElementById(id).hidden=settings[key]===false;document.querySelectorAll('a[href="#'+id+'"]').forEach(a=>a.hidden=settings[key]===false);}if(settings.accent){document.documentElement.style.setProperty('--blue',settings.accent);document.documentElement.style.setProperty('--teal',settings.accent);}if(settings.hero_image){const img=document.createElement('img');img.src=settings.hero_image;img.alt='';img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.48';document.getElementById('mg').replaceChildren(img);document.querySelectorAll('.mga,.mgt').forEach(x=>x.hidden=true);}document.addEventListener("langchange",brand);});
+
+
+/* morph gallery: WebGL noise dissolve (ported from the 21st.dev component to plain JS) */
+(()=>{
+const IDS=["photo-1528181304800-259b08848526","photo-1563492065599-3520f775eeed","photo-1508009603885-50cf7c579365","photo-1519451241324-20b4ea2c4220","photo-1504214208698-ea1916a2195a","photo-1552465011-b4e21bf6e79a"];
+const P=IDS.map(id=>({src:`https://images.unsplash.com/${id}?auto=format&fit=crop&w=1920&q=75`,thumb:`https://images.unsplash.com/${id}?auto=format&fit=crop&w=160&h=100&q=60`}));
+const DUR=1500,SCALE=3.5,EDGE=.15,DRIFT=.5,AUTO=5000;
+const N=P.length,hero=$(".hero"),mg=$("#mg"),cv=$("#mgc"),strip=$("#mgt"),live=$("#mgl");
+const reduce=matchMedia("(prefers-reduced-motion: reduce)");
+const dead=P.map(()=>false),IM=P.map(()=>null),tex=P.map(()=>null),asp=P.map(()=>1);
+let active=0,ready=false,failed=false,visible=true,hold=false,lastGo=performance.now();
+let gl=null,prog=null,buf=null,U={},from=0,to=0,progress=1,t0=0,dir=1,req=null,dirty=true,raf=0,fb=[];
+
+const ease=t=>{const x=Math.min(Math.max(t,0),1);return x<.5?16*x**5:1-(-2*x+2)**5/2};
+const step=d=>{let i=active;for(let k=0;k<N;k++){i=(i+d+N)%N;if(!dead[i])return i}return active};
+
+/* thumbnails */
+const lis=P.map((p,i)=>{
+  const li=document.createElement("li"),b=document.createElement("button");
+  b.type="button";b.setAttribute("aria-label",L("gal_show",i+1));
+  b.innerHTML=`<img src="${p.thumb}" alt="" width="80" height="50" loading="lazy" decoding="async">`;
+  b.querySelector("img").onerror=()=>{li.hidden=true};
+  b.onclick=()=>go(i);li.appendChild(b);strip.appendChild(li);return li});
+function mark(){
+  lis.forEach((li,i)=>{const b=li.firstChild;b.classList.toggle("on",i===active);b.setAttribute("aria-current",i===active)});
+  live.textContent=L("gal_of",active+1,N);lis.forEach((li,i)=>li.firstChild.setAttribute("aria-label",L("gal_show",i+1)));
+  fb.forEach((im,i)=>{if(im)im.style.opacity=i===active?1:0});
+}
+function go(i){
+  if(i===active||dead[i])return;
+  if(!failed){req={from:active,to:i};dirty=true}
+  active=i;lastGo=performance.now();mark();kick();
+}
+function kill(i){dead[i]=true;lis[i].hidden=true;if(active===i)go(step(1))}
+
+/* no-shader fallback: plain stacked images, opacity only */
+function fallback(){
+  if(failed)return;failed=true;cancelAnimationFrame(raf);raf=0;cv.remove();
+  P.forEach((p,i)=>{if(dead[i])return;const im=new Image();im.alt="";im.decoding="async";im.src=p.src;
+    im.onerror=()=>{dead[i]=true;lis[i].hidden=true;im.remove();fb[i]=null;if(active===i&&step(1)!==i){active=step(1);mark()}};
+    mg.insertBefore(im,mg.firstChild);fb[i]=im});
+  mark();
+}
+
+/* shaders */
+const VERT=`attribute vec2 a_position;varying vec2 v_uv;void main(){v_uv=a_position*0.5+0.5;gl_Position=vec4(a_position,0.0,1.0);}`;
+const FRAG=`
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+uniform sampler2D u_from;uniform sampler2D u_to;uniform float u_progress;uniform vec2 u_resolution;
+uniform float u_fromAspect;uniform float u_toAspect;uniform float u_scale;uniform float u_direction;uniform float u_edge;uniform float u_drift;
+varying vec2 v_uv;
+vec3 permute(vec3 x){return mod(((x*34.0)+1.0)*x,289.0);}
+float snoise(vec2 v){
+  const vec4 C=vec4(0.211324865405187,0.366025403784439,-0.577350269189626,0.024390243902439);
+  vec2 i=floor(v+dot(v,C.yy));vec2 x0=v-i+dot(i,C.xx);
+  vec2 i1=(x0.x>x0.y)?vec2(1.0,0.0):vec2(0.0,1.0);
+  vec4 x12=x0.xyxy+C.xxzz;x12.xy-=i1;i=mod(i,289.0);
+  vec3 p=permute(permute(i.y+vec3(0.0,i1.y,1.0))+i.x+vec3(0.0,i1.x,1.0));
+  vec3 m=max(0.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.0);
+  m=m*m;m=m*m;
+  vec3 x=2.0*fract(p*C.www)-1.0;vec3 h=abs(x)-0.5;vec3 ox=floor(x+0.5);vec3 a0=x-ox;
+  m*=1.79284291400159-0.85373472095314*(a0*a0+h*h);
+  vec3 g;g.x=a0.x*x0.x+h.x*x0.y;g.yz=a0.yz*x12.xz+h.yz*x12.yw;
+  return 130.0*dot(m,g);
+}
+float fbm(vec2 v){float value=0.0;float amplitude=0.5;for(int i=0;i<5;i++){value+=amplitude*snoise(v);v*=2.0;amplitude*=0.5;}return value;}
+vec2 mirror(vec2 uv){return 1.0-abs(1.0-mod(uv,2.0));}
+vec2 coverUV(vec2 uv,float imgAspect){
+  float canvasAspect=u_resolution.x/u_resolution.y;
+  vec2 scale=(canvasAspect>imgAspect)?vec2(1.0,imgAspect/canvasAspect):vec2(canvasAspect/imgAspect,1.0);
+  return mirror((uv-0.5)*scale+0.5);
+}
+void main(){
+  float adjusted=u_progress*(1.0+2.0*u_edge)-u_edge;
+  float noise=fbm(v_uv*u_scale+vec2(0.0,u_progress*u_direction))*0.5+0.5;
+  noise=smoothstep(0.0,2.0,length(texture2D(u_to,coverUV(v_uv,u_toAspect)).rgb)+noise);
+  float mixFactor=1.0-smoothstep(adjusted-u_edge,adjusted+u_edge,noise);
+  vec2 fromUV=coverUV(v_uv+vec2(0.0,noise*u_progress*u_drift*u_direction),u_fromAspect);
+  vec2 toUV=coverUV(v_uv+vec2(0.0,noise*(1.0-u_progress)*-0.5*u_drift*u_direction),u_toAspect);
+  gl_FragColor=mix(texture2D(u_from,fromUV),texture2D(u_to,toUV),mixFactor);
+}`;
+function sh(type,s){const o=gl.createShader(type);gl.shaderSource(o,s);gl.compileShader(o);
+  if(!gl.getShaderParameter(o,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(o));return o}
+function setup(){
+  const v=sh(gl.VERTEX_SHADER,VERT),f=sh(gl.FRAGMENT_SHADER,FRAG);
+  prog=gl.createProgram();gl.attachShader(prog,v);gl.attachShader(prog,f);gl.linkProgram(prog);
+  gl.deleteShader(v);gl.deleteShader(f);
+  if(!gl.getProgramParameter(prog,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(prog));
+  gl.useProgram(prog);
+  buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  const loc=gl.getAttribLocation(prog,"a_position");gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  ["from","to","progress","resolution","fromAspect","toAspect","scale","direction","edge","drift"].forEach(k=>U[k]=gl.getUniformLocation(prog,"u_"+k));
+  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);
+  IM.forEach((im,i)=>im&&upload(i));
+}
+function upload(i){
+  const im=IM[i],t=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,t);
+  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,im);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+  tex[i]=t;asp[i]=im.naturalWidth/Math.max(im.naturalHeight,1);
+}
+const pick=i=>tex[i]||tex.find(t=>t)||null;
+function resize(){
+  const d=Math.min(devicePixelRatio||1,2),w=Math.round(cv.clientWidth*d),h=Math.round(cv.clientHeight*d);
+  if(!w||!h||(cv.width===w&&cv.height===h))return;
+  cv.width=w;cv.height=h;gl.viewport(0,0,w,h);dirty=true;kick();
+}
+function draw(){
+  dirty=false;
+  if(req){const r=req;req=null;
+    if(r.from!==r.to){from=r.from;to=r.to;progress=0;t0=performance.now();
+      dir=((r.to-r.from+N)%N)*2<=N?1:-1}}
+  if(progress<1){const span=reduce.matches?0:DUR;
+    progress=span===0?1:ease((performance.now()-t0)/span)}
+  const a=pick(from),b=pick(to);if(!a||!b)return;
+  gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,a);gl.uniform1i(U.from,0);
+  gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,b);gl.uniform1i(U.to,1);
+  gl.uniform1f(U.progress,progress);gl.uniform2f(U.resolution,cv.width,cv.height);
+  gl.uniform1f(U.fromAspect,asp[from]||1);gl.uniform1f(U.toAspect,asp[to]||1);
+  gl.uniform1f(U.scale,SCALE);gl.uniform1f(U.direction,dir);gl.uniform1f(U.edge,EDGE);gl.uniform1f(U.drift,DRIFT);
+  gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+}
+function frame(){
+  raf=0;if(!visible||document.hidden||failed)return;
+  if(dirty||progress<1||req)draw();
+  raf=requestAnimationFrame(frame);
+}
+function kick(){if(!raf&&ready&&!failed&&visible&&!document.hidden){dirty=true;raf=requestAnimationFrame(frame)}}
+
+function loadImg(src){return new Promise((ok,no)=>{const im=new Image();im.crossOrigin="anonymous";im.decoding="async";im.onload=()=>ok(im);im.onerror=no;im.src=src})}
+
+/* boot */
+gl=cv.getContext("webgl",{alpha:false,antialias:false})||cv.getContext("experimental-webgl");
+if(!gl){fallback()}else{
+  try{setup()}catch(e){fallback()}
+  if(!failed){
+    cv.addEventListener("webglcontextlost",e=>{e.preventDefault();cancelAnimationFrame(raf);raf=0});
+    cv.addEventListener("webglcontextrestored",()=>{tex.fill(null);try{setup();dirty=true;kick()}catch(e){fallback()}});
+    new ResizeObserver(()=>{if(!failed&&gl)resize()}).observe(cv);
+    let refused=0;
+    P.forEach((p,i)=>loadImg(p.src).then(im=>{
+      if(failed)return;IM[i]=im;upload(i);
+      if(!ready){ready=true;resize();cv.style.opacity=1}
+      dirty=true;kick();
+    },()=>{refused++;if(refused===N)fallback();else kill(i)}));
+  }
+}
+mark();document.addEventListener("langchange",mark);
+
+/* only render while the hero is on screen */
+new IntersectionObserver(es=>{visible=es[0].isIntersecting;if(visible)kick()},{threshold:0}).observe(hero);
+document.addEventListener("visibilitychange",kick);
+
+/* controls */
+$("#mgp").onclick=()=>go(step(-1));
+$("#mgn").onclick=()=>go(step(1));
+strip.addEventListener("keydown",e=>{
+  if(e.key==="ArrowLeft"){e.preventDefault();go(step(-1))}
+  else if(e.key==="ArrowRight"){e.preventDefault();go(step(1))}});
+let sx=null;
+hero.addEventListener("pointerdown",e=>{sx=e.target.closest(".search,.mgt,.mga,a,button,input,select,label")?null:e.clientX});
+hero.addEventListener("pointerup",e=>{if(sx===null)return;const dx=e.clientX-sx;sx=null;if(Math.abs(dx)>48)go(step(dx<0?1:-1))});
+
+/* autoplay: pauses while typing / hovering the search card or thumbnails */
+hero.addEventListener("focusin",()=>hold=true);
+hero.addEventListener("focusout",e=>{if(!hero.contains(e.relatedTarget))hold=false});
+[".search",".mgt"].forEach(s=>{const el=$(s);el.addEventListener("pointerenter",()=>hold=true);el.addEventListener("pointerleave",()=>{hold=hero.contains(document.activeElement)})});
+setInterval(()=>{if(reduce.matches||hold||!visible||document.hidden)return;if(performance.now()-lastGo>=AUTO)go(step(1))},500);
+})();
+
+/* reveal + counters */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add("in");
+  e.target.querySelectorAll("[data-n]").forEach(c=>{const n=+c.dataset.n,dd=+c.dataset.d||0,s=c.dataset.s||"",t0=performance.now();
+    (function f(t){const k=Math.min(1,(t-t0)/1600),v=n*(1-Math.pow(1-k,3));c.textContent=(dd?(v/10).toFixed(1):Math.round(v).toLocaleString("th-TH"))+s;if(k<1)requestAnimationFrame(f)})(t0)});
+  io.unobserve(e.target)}),{threshold:.06,rootMargin:"0px 0px -4% 0px"});
+$$(".rvl").forEach(e=>io.observe(e));
+</script>
+<script>window.TRAVEL_PREVIEW={"settings": {"site_name": "ไปด้วยกัน", "headline": "ทุกการเดินทาง เริ่มต้นด้วยกัน", "intro": "ค้นพบทริปดี ๆ และผู้ให้บริการท้องถิ่นในที่เดียว", "contact_email": "", "contact_phone": "", "notice": "รายการและราคาเริ่มต้นเป็นข้อมูลตัวอย่าง กรุณารอเจ้าหน้าที่ยืนยันก่อนชำระเงิน", "maintenance": false, "hero_title": "ทริปต่อไปของคุณ", "hero_tagline": "เริ่มต้นที่ไปด้วยกัน", "hero_intro": "สำรวจที่พัก กิจกรรม รถเช่า และบริการท้องถิ่น ส่งคำขอให้ทีมงานดูแล", "hero_image": "", "accent": "#087e80", "show_places": true, "show_deals": true, "show_apps": true, "id": 1}, "destinations": [{"slug": "pai", "category": "mt", "price": 99000, "name_th": "ปาย", "name_en": "Pai", "name_zh": "拜县", "description_th": "ถนนคนเดิน สะพานประวัติศาสตร์ และบรรยากาศชิลล์", "description_en": "Walking street, a historic bridge and a laid-back vibe.", "description_zh": "步行街、历史悠久的桥和悠闲惬意的氛围", "image": "", "active": true, "id": 9}, {"slug": "pattaya", "category": "city", "price": 149000, "name_th": "พัทยา", "name_en": "Pattaya", "name_zh": "芭堤雅", "description_th": "ใกล้กรุงเทพฯ เกาะล้าน และกิจกรรมสนุกทั้งวัน", "description_en": "Close to Bangkok, with Koh Larn and fun activities all day.", "description_zh": "离曼谷很近，有大西岭（兰岛）和全天好玩的活动", "image": "", "active": true, "id": 8}, {"slug": "chiangrai", "category": "mt", "price": 129000, "name_th": "เชียงราย", "name_en": "Chiang Rai", "name_zh": "清莱", "description_th": "วัดร่องขุ่น ไร่ชา และทะเลหมอกบนดอย", "description_en": "Wat Rong Khun, tea plantations and misty mountain views.", "description_zh": "白庙（龙昆寺）、茶园与山间云海", "image": "", "active": true, "id": 7}, {"slug": "samui", "category": "sea", "price": 289000, "name_th": "เกาะสมุย", "name_en": "Koh Samui", "name_zh": "苏梅岛", "description_th": "หาดเฉวง ชมพระอาทิตย์ตก และปาร์ตี้ริมหาด", "description_en": "Chaweng Beach, sunsets and beachfront parties.", "description_zh": "查汶海滩、日落美景和海滩派对", "image": "", "active": true, "id": 6}, {"slug": "krabi", "category": "sea", "price": 219000, "name_th": "กระบี่", "name_en": "Krabi", "name_zh": "甲米", "description_th": "อ่าวนาง ไร่เลย์ และทะเลแหวก น้ำใสสุดๆ", "description_en": "Ao Nang, Railay and the Thale Waek sandbar, with crystal-clear water.", "description_zh": "奥南海滩、莱利海滩和分水海，海水清澈透亮", "image": "", "active": true, "id": 5}, {"slug": "bangkok", "category": "city", "price": 189000, "name_th": "กรุงเทพฯ", "name_en": "Bangkok", "name_zh": "曼谷", "description_th": "วัดพระแก้ว ตลาดน้ำ สตรีทฟู้ด และช้อปปิ้งครบทุกสไตล์", "description_en": "The Grand Palace, floating markets, street food and shopping for every style.", "description_zh": "玉佛寺、水上市场、街头美食与购物，应有尽有", "image": "", "active": true, "id": 4}, {"slug": "chiangmai", "category": "mt", "price": 159000, "name_th": "เชียงใหม่", "name_en": "Chiang Mai", "name_zh": "清迈", "description_th": "ดอยสุเทพ คาเฟ่ และวัดเก่าแก่ อากาศดีเกือบทั้งปี", "description_en": "Doi Suthep, cafés and ancient temples, with pleasant weather most of the year.", "description_zh": "素贴山、咖啡馆和古老寺庙，全年气候宜人", "image": "", "active": true, "id": 3}, {"slug": "phuket", "category": "sea", "price": 249000, "name_th": "ภูเก็ต", "name_en": "Phuket", "name_zh": "普吉岛", "description_th": "หาดป่าตอง เมืองเก่า และเกาะรอบๆ เหมาะกับพักผ่อนริมทะเล", "description_en": "Patong Beach, the old town and nearby islands. Perfect for a seaside break.", "description_zh": "芭东海滩、老城区和周边岛屿，适合海边度假", "image": "", "active": true, "id": 2}], "services": [{"title": "ช่วยค้นหาเที่ยวบิน", "category": "flight", "destination": "ทุกจังหวัด", "description": "บริการตัวอย่างสำหรับทดสอบระบบ เปลี่ยนรายละเอียดและราคาในหลังบ้านก่อนเปิดขาย", "price": 0, "unit": "request", "capacity": 0, "schedule": "บริการรับคำขอค้นหา ยังไม่เชื่อมสายการบิน", "included": "เจ้าหน้าที่เสนอราคา ไม่มีการออกตั๋วอัตโนมัติ", "cancellation": "ขอยกเลิกก่อนเดินทางอย่างน้อย 48 ชั่วโมง การคืนเงินต้องได้รับการตรวจสอบจากเจ้าหน้าที่", "image": "", "active": true, "featured": true, "accessible": false, "family": true, "id": 17}, {"title": "รถตู้เชียงใหม่–ปาย", "category": "bus", "destination": "เชียงใหม่", "description": "บริการตัวอย่างสำหรับทดสอบระบบ เปลี่ยนรายละเอียดและราคาในหลังบ้านก่อนเปิดขาย", "price": 25000, "unit": "person", "capacity": 12, "schedule": "เลือกวันเดินทาง • เจ้าหน้าที่ยืนยันรอบรถ", "included": "สัมภาระ 1 ใบต่อคน", "cancellation": "ขอยกเลิกก่อนเดินทางอย่างน้อย 48 ชั่วโมง การคืนเงินต้องได้รับการตรวจสอบจากเจ้าหน้าที่", "image": "", "active": true, "featured": true, "accessible": false, "family": true, "id": 16}, {"title": "เชียงราย 3 วัน 2 คืน", "category": "package", "destination": "เชียงราย", "description": "บริการตัวอย่างสำหรับทดสอบระบบ เปลี่ยนรายละเอียดและราคาในหลังบ้านก่อนเปิดขาย", "price": 499000, "unit": "person", "capacity": 10, "schedule": "ทริป 3 วัน • นัดหมายวันเดินทางล่วงหน้า", "included": "รวมที่พักและรถ ไม่รวมเที่ยวบิน", "cancellation": "ขอยกเลิกก่อนเดินทางอย่างน้อย 48 ชั่วโมง การคืนเงินต้องได้รับการตรวจสอบจากเจ้าหน้าที่", "image": "", "active": true, "featured": true, "accessible": false, "family": true, "id": 15}, {"title": "ไกด์เดินชมเมืองเก่า", "category": "guide", "destination": "กรุงเทพฯ", "description": "บริการตัวอย่างสำหรับทดสอบระบบ เปลี่ยนรายละเอียดและราคาในหลังบ้านก่อนเปิดขาย", "price": 65000, "unit": "person", "capacity": 12, "schedule": "ทัวร์เดิน 3 ชั่วโมง • ภาษาไทย", "included": "รวมไกด์ ไม่รวมค่าเข้าชม", "cancellation": "ขอยกเลิกก่อนเดินทางอย่างน้อย 48 ชั่วโมง การคืนเงินต้องได้รับการตรวจสอบจากเจ้าหน้าที่", "image": "", "active": true, "featured": true, "accessible": false, "family": true, "id": 14}, {"title": "รถรับส่งสนามบิน", "category": "transfer", "destination": "กรุงเทพฯ", "description": "บริการตัวอย่างสำหรับทดสอบระบบ เปลี่ยนรายละเอียดและราคาในหลังบ้านก่อนเปิดขาย", "price": 89000, "unit": "booking", "capacity": 10, "schedule": "รถส่วนตัว 1–4 คน • ระบุเที่ยวบินในหมายเหตุ", "included": "รวมคนขับและค่าน้ำมัน", "cancellation": "ขอยกเลิกก่อนเดินทางอย่างน้อย 48 ชั่วโมง การคืนเงินต้องได้รับการตรวจสอบจากเจ้าหน้าที่", "image": "", "active": true, "featured": true, "accessible": false, "family": true, "id": 13}, {"title": "รถเช่าขับเอง ภูเก็ต", "category": "car", "destination": "ภูเก็ต", "description": "บริการตัวอย่างสำหรับทดสอบระบบ เปลี่ยนรายละเอียดและราคาในหลังบ้านก่อนเปิดขาย", "price": 99000, "unit": "day", "capacity": 4, "schedule": "รับ–คืน 09:00 • ผู้ขับต้องมีใบขับขี่", "included": "ไม่รวมน้ำมันและเงินประกัน", "cancellation": "ขอยกเลิกก่อนเดินทางอย่างน้อย 48 ชั่วโมง การคืนเงินต้องได้รับการตรวจสอบจากเจ้าหน้าที่", "image": "", "active": true, "featured": true, "accessible": false, "family": true, "id": 12}, {"title": "วันเดย์ทริปทะเลกระบี่", "category": "act", "destination": "กระบี่", "description": "บริการตัวอย่างสำหรับทดสอบระบบ เปลี่ยนรายละเอียดและราคาในหลังบ้านก่อนเปิดขาย", "price": 219000, "unit": "person", "capacity": 20, "schedule": "ออกเดินทาง 08:00 • ใช้เวลา 7 ชั่วโมง", "included": "รวมเรือและอาหารกลางวัน ไม่รวมค่าอุทยาน", "cancellation": "ขอยกเลิกก่อนเดินทางอย่างน้อย 48 ชั่วโมง การคืนเงินต้องได้รับการตรวจสอบจากเจ้าหน้าที่", "image": "", "active": true, "featured": true, "accessible": false, "family": true, "id": 11}, {"title": "โฮมสเตย์เชียงใหม่", "category": "hotel", "destination": "เชียงใหม่", "description": "บริการตัวอย่างสำหรับทดสอบระบบ เปลี่ยนรายละเอียดและราคาในหลังบ้านก่อนเปิดขาย", "price": 159000, "unit": "night", "capacity": 6, "schedule": "พัก 2 คนต่อห้อง • เช็กอิน 14:00 / เช็กเอาต์ 12:00", "included": "รวมอาหารเช้า ไม่รวมรถรับส่ง", "cancellation": "ขอยกเลิกก่อนเดินทางอย่างน้อย 48 ชั่วโมง การคืนเงินต้องได้รับการตรวจสอบจากเจ้าหน้าที่", "image": "", "active": true, "featured": true, "accessible": false, "family": true, "id": 10}], "content": [{"type": "article", "title": "เตรียมตัวก่อนออกเดินทาง", "body": "ตรวจเอกสารประจำตัว เงื่อนไขยกเลิก เวลาเช็กอิน สภาพอากาศ และการเข้าถึงสำหรับผู้ร่วมเดินทาง ติดต่อผู้ให้บริการก่อนเดินทางทุกครั้ง", "published": true, "id": 20}, {"type": "faq", "title": "ชำระเงินอย่างไร?", "body": "เวอร์ชันนี้ยังไม่รับชำระเงินออนไลน์ อย่าส่งเลขบัตรหรือข้อมูลการเงินในแบบฟอร์ม เจ้าหน้าที่จะแจ้งช่องทางหลังยืนยันคำขอ", "published": true, "id": 19}, {"type": "faq", "title": "ส่งคำขอแล้วถือว่าจองสำเร็จหรือยัง?", "body": "คำขอจะอยู่สถานะรอตรวจสอบ เจ้าหน้าที่ต้องยืนยันที่ว่างและเงื่อนไขก่อน จึงเปลี่ยนเป็นยืนยันแล้ว", "published": true, "id": 18}], "reviews": []};</script>
+<script>
+(()=>{'use strict';
+const el=id=>document.getElementById(id), esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const categories={hotel:'ที่พัก',flight:'เที่ยวบิน',car:'รถเช่า',bus:'รถ / เรือ',act:'กิจกรรม',transfer:'รับส่งสนามบิน',guide:'ไกด์ท้องถิ่น',package:'แพ็กเกจทัวร์'}, icons={hotel:'⌂',flight:'✈',car:'↗',bus:'⇄',act:'☀',transfer:'⇢',guide:'◎',package:'◇'},units={night:'ห้อง / คืน',day:'คัน / วัน',person:'คน',booking:'คัน / เที่ยว',request:'สอบถามราคา'},status={pending:'รอตรวจสอบ',confirmed:'ยืนยันแล้ว',completed:'เดินทางเสร็จสิ้น',cancelled:'ยกเลิก'},payments={unpaid:'ยังไม่รับชำระ',paid:'ตรวจสอบรับเงินแล้ว',refund_pending:'รอดำเนินการคืนเงิน',refunded:'เจ้าหน้าที่บันทึกคืนเงินแล้ว'};
+const thb=v=>(Number(v)/100).toLocaleString('th-TH',{style:'currency',currency:'THB'});let data={services:[],content:[],reviews:[],settings:{}}, online=false,plan=[];
+try{plan=JSON.parse(localStorage.getItem('pdk-plan')||'[]');if(!Array.isArray(plan))plan=[]}catch{}
+async function api(path,body){if(location.protocol==='file:')throw Error('โปรดเปิดผ่านเซิร์ฟเวอร์ Python ตามคู่มือ เพื่อใช้การจองและหลังบ้าน');const r=await fetch('/api/'+path,{method:body?'POST':'GET',headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined});let j;try{j=await r.json()}catch{throw Error('เชื่อมต่อระบบไม่ได้ กรุณาเปิดผ่านเซิร์ฟเวอร์ตามคู่มือ')}if(!r.ok)throw Error(j.error||'เกิดข้อผิดพลาด');return j}
+function fail(target,e){target.textContent=e.message;target.classList.add('error')}
+function render(){
+ const q=el('service-query').value.trim().toLowerCase(),cat=el('service-category').value,budget=el('service-budget').value;
+ let list=data.services.filter(x=>(!cat||x.category===cat)&&(!q||(x.title+' '+x.destination).toLowerCase().includes(q))&&(!budget||x.price<=Number(budget)*100)&&(!el('filter-family').checked||x.family)&&(!el('filter-access').checked||x.accessible));
+ const sort=el('service-sort').value;list.sort(sort==='low'?(a,b)=>a.price-b.price:sort==='high'?(a,b)=>b.price-a.price:(a,b)=>Number(b.featured)-Number(a.featured));
+ el('service-results').innerHTML=list.length?list.map(s=>`<article class="service-card"><div class="service-art"><span>${icons[s.category]||'◇'}</span><small>${esc(categories[s.category])} / THAILAND</small>${s.image?`<img src="${esc(s.image)}" alt="${esc(s.title)}" loading="lazy" referrerpolicy="no-referrer">`:''}</div><div class="service-copy"><div class="eyebrow">${esc(s.destination)}</div><h3>${esc(s.title)}</h3><p>${esc(s.schedule)}</p><p>${s.family?'เหมาะกับครอบครัว · ':''}${s.accessible?'รองรับผู้มีข้อจำกัดการเคลื่อนไหว':'สอบถามความเหมาะสมก่อนเดินทาง'}</p><div class="service-price">${s.unit==='request'?'ขอใบเสนอราคา':thb(s.price)} <small>${s.unit==='request'?'':'/ '+units[s.unit]}</small></div><div class="service-actions"><button class="btn" data-book="${s.id}">${s.unit==='request'?'สอบถามเที่ยวบิน':'รายละเอียด / ส่งคำขอ'}</button><button class="btn subtle" data-plan="${s.id}">＋ เพิ่มในแผน</button></div></div></article>`).join(''):'<p class="empty">ไม่พบบริการที่ตรงกับตัวกรอง ลองเปลี่ยนประเภทหรือล้างตัวกรอง</p>';
+ el('service-results').querySelectorAll('[data-book]').forEach(b=>b.onclick=()=>book(Number(b.dataset.book)));
+ el('service-results').querySelectorAll('[data-plan]').forEach(b=>b.onclick=()=>{if(!plan.includes(Number(b.dataset.plan)))plan.push(Number(b.dataset.plan));savePlan();b.textContent='เพิ่มแล้ว ✓'});
+}
+function savePlan(){try{localStorage.setItem('pdk-plan',JSON.stringify(plan))}catch{}renderPlan()}
+function renderPlan(){const ss=plan.map(id=>data.services.find(x=>x.id===id)).filter(Boolean);el('plan-items').innerHTML=ss.length?ss.map(s=>`<div class="plan-row"><div><b>${esc(s.title)}</b><br><small>${esc(s.destination)} · ${s.unit==='request'?'สอบถามราคา':thb(s.price)+' / '+units[s.unit]}</small></div><button class="link" data-remove="${s.id}">นำออก</button></div>`).join(''):'<p>ยังไม่มีบริการในแผน เลือกจากรายการด้านบนได้เลย</p>';el('plan-items').querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{plan=plan.filter(id=>id!==Number(b.dataset.remove));savePlan()})}
+function dismiss(id){el(id).querySelector('.dialog-close').onclick=()=>el(id).close();el(id).addEventListener('click',e=>{if(e.target===el(id)){const r=el(id).getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)el(id).close()}})}
+dismiss('booking-dialog');dismiss('policy-dialog');
+function book(id){const s=data.services.find(x=>x.id===id);if(!s)return;if(s.unit==='request'){el('contact-form').elements.message.value='ขอใบเสนอราคา '+s.title+'\nวันเดินทาง: \nจำนวนคน: \nเส้นทาง: ';el('contact-form').scrollIntoView({behavior:'smooth'});return}
+ const today=new Date().toLocaleDateString('en-CA');const start=el('d1').value||today;const end=['person','booking'].includes(s.unit)?start:el('d2').value;
+ el('booking-body').innerHTML=`<div class="eyebrow">REQUEST YOUR JOURNEY</div><h2>${esc(s.title)}</h2><p>${esc(s.description)}</p><p><b>รวม / ไม่รวม:</b> ${esc(s.included)}</p><p><b>ยกเลิก:</b> ${esc(s.cancellation)}</p><p class="notice">ยอดด้านล่างเป็นราคาเสนอจากข้อมูลบริการ ยังไม่ใช่การยืนยันการจองหรือการชำระเงิน</p><form id="booking-form" class="pro-form"><div class="form-row"><label>วันเริ่ม<input name="start" type="date" min="${today}" required value="${esc(start)}"></label><label>วันสิ้นสุด${['person','booking'].includes(s.unit)?' (วันเดียวกัน)':''}<input name="end" type="date" min="${today}" required value="${esc(end)}"></label></div><div class="form-row"><label>ผู้เดินทาง<input name="pax" type="number" min="1" max="100" value="2" required></label><label>จำนวน${s.unit==='night'?'ห้อง':s.unit==='person'?' (คิดตามผู้เดินทาง)':'คัน'}<input name="units" type="number" min="1" max="100" value="1" required ${s.unit==='person'?'readonly':''}></label></div><label>โค้ดส่วนลด<input name="coupon" maxlength="40" placeholder="ถ้ามี"></label><button class="btn subtle" type="button" id="quote-button">ตรวจสอบราคาและโควตา</button><div id="quote-result" class="price-box" role="status">${online?'กรุณาตรวจสอบราคาและโควตาก่อนส่งคำขอ':'โหมดดูตัวอย่าง ต้องเปิดเซิร์ฟเวอร์จึงจะตรวจสอบและจองได้'}</div><label>ชื่อผู้ติดต่อ<input name="name" required maxlength="100" autocomplete="name"></label><div class="form-row"><label>อีเมล<input name="email" type="email" required maxlength="150" autocomplete="email"></label><label>โทรศัพท์<input name="phone" type="tel" required maxlength="30" autocomplete="tel"></label></div><label>หมายเหตุ<textarea name="note" maxlength="1000" placeholder="เที่ยวบิน จุดรับส่ง หรือความต้องการพิเศษ ไม่กรอกข้อมูลบัตร/ข้อมูลสุขภาพละเอียด"></textarea></label><label class="checkline"><input type="checkbox" name="consent" required> ยอมรับเงื่อนไขบริการ เงื่อนไขยกเลิก และนโยบายข้อมูลที่ส่วนท้ายเว็บ</label><button class="btn" id="submit-booking" disabled>ส่งคำขอจอง</button><p class="form-result" role="status"></p></form>`;
+ el('booking-dialog').showModal();const f=el('booking-form'),out=el('quote-result'),submit=el('submit-booking');let quoted='',quotedTotal=0,key=crypto.randomUUID?crypto.randomUUID():Array.from(crypto.getRandomValues(new Uint8Array(24)),x=>x.toString(16).padStart(2,'0')).join('');
+ const payload=()=>{const d=Object.fromEntries(new FormData(f));return {...d,service_id:id,pax:Number(d.pax),units:s.unit==='person'?Number(d.pax):Number(d.units),consent:f.elements.consent.checked,request_key:key,expected_total:quotedTotal}};
+ const sig=d=>JSON.stringify([d.service_id,d.start,d.end,d.pax,d.units,d.coupon]);
+ f.addEventListener('input',()=>{if(sig(payload())!==quoted){submit.disabled=true;out.textContent='ข้อมูลราคาเปลี่ยน กรุณาตรวจสอบราคาอีกครั้ง'}});
+ el('quote-button').onclick=async()=>{const b=el('quote-button');b.disabled=true;out.classList.remove('error');try{const d=payload(),q=await api('quote',d);if(sig(payload())!==sig(d))return;quoted=sig(d);quotedTotal=q.total;out.textContent=`ราคา ${thb(q.subtotal)}\nส่วนลด ${thb(q.discount)}\nรวม ${thb(q.total)} (THB)\nคำนวณตาม ${q.units} ${s.unit==='person'?'คน':'หน่วย'} · ราคาจากระบบ ไม่มีค่าชำระเงินออนไลน์`;submit.disabled=false}catch(e){fail(out,e);submit.disabled=true}finally{b.disabled=false}};
+ f.onsubmit=async e=>{e.preventDefault();if(sig(payload())!==quoted)return;submit.disabled=true;const result=f.querySelector('.form-result');try{const r=await api('bookings',payload());el('booking-body').innerHTML=`<div class="eyebrow">REQUEST RECEIVED</div><h2>ได้รับคำขอแล้ว</h2><p>${esc(r.message)}</p><div class="price-box">เลขคำขอ: ${esc(r.reference)}\nรหัสลับ: ${esc(r.access_token)}\nยอด: ${thb(r.total)}\nสถานะ: รอตรวจสอบ</div><p>เก็บทั้งเลขคำขอและรหัสลับไว้ ระบบยังไม่ส่งอีเมลอัตโนมัติ</p><button class="btn" id="save-receipt">ดาวน์โหลดรหัสติดตาม</button>`;el('save-receipt').onclick=()=>{const a=document.createElement('a'),u=URL.createObjectURL(new Blob([`ไปด้วยกัน\nเลขคำขอ: ${r.reference}\nรหัสลับ: ${r.access_token}\nยอด THB: ${(r.total/100).toFixed(2)}\nสถานะรอตรวจสอบ ยังไม่ชำระเงิน\nเก็บรหัสนี้เป็นความลับ`],{type:'text/plain;charset=utf-8'}));a.href=u;a.download=r.reference+'.txt';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};el('track-form').elements.reference.value=r.reference;el('track-form').elements.access_token.value=r.access_token}catch(ex){fail(result,ex);submit.disabled=false}};
+}
+function content(){const c=data.content;el('faq-list').innerHTML=c.filter(x=>x.type==='faq').map(x=>`<details><summary>${esc(x.title)}</summary><p class="preserve">${esc(x.body)}</p></details>`).join('');el('article-list').innerHTML=c.filter(x=>x.type==='article').map(x=>`<article class="service-card"><div class="service-copy"><div class="eyebrow">TRAVEL JOURNAL</div><h3>${esc(x.title)}</h3><p class="preserve">${esc(x.body)}</p></div></article>`).join('')||'<p class="empty">บทความใหม่กำลังมา</p>';el('review-list').innerHTML=data.reviews.length?data.reviews.map(x=>`<article class="service-card"><div class="service-copy"><span>${'★'.repeat(x.rating)}</span><p>${esc(x.text)}</p><b>${esc(x.name)}</b><small>เดินทางแล้ว · ผ่านการตรวจสอบ</small></div></article>`).join(''):'<p class="empty">ยังไม่มีรีวิวที่ผ่านการตรวจสอบ ไม่มีการสร้างคะแนนตัวอย่าง</p>';const deals=el('managed-deals');deals.innerHTML=c.filter(x=>x.type==='banner').map(x=>`<article class="service-card"><div class="service-copy"><h3>${esc(x.title)}</h3><p class="preserve">${esc(x.body)}</p></div></article>`).join('')||'<p>ยังไม่มีประกาศโปรโมชั่น</p>';const s=data.settings;if(s.headline)el('service-headline').textContent=s.headline;if(s.intro)el('service-intro').textContent=s.intro;document.title=(s.site_name||'ไปด้วยกัน')+' · บริการท่องเที่ยว';el('site-notice').textContent=(online?'':'โหมดตัวอย่าง • เปิดโปรเจกต์ผ่านเซิร์ฟเวอร์เพื่อใช้ระบบจริง\n')+(s.maintenance?'ปิดรับคำขอชั่วคราว · ':'')+(s.notice||'');el('contact-details').textContent=[s.contact_email,s.contact_phone].filter(Boolean).join(' · ')||'ยังไม่ได้ตั้งค่าข้อมูลติดต่อ ใช้แบบฟอร์มติดต่อได้เมื่อเปิดเซิร์ฟเวอร์';c.filter(x=>x.type==='banner').forEach(x=>{const p=document.createElement('p');p.className='notice';p.textContent=x.title+' — '+x.body;el('site-notice').after(p)})}
+const policies={privacy:['นโยบายข้อมูลส่วนบุคคล','เราใช้ชื่อ อีเมล เบอร์โทร วันเดินทาง และข้อความ เพื่อดำเนินคำขอจอง ติดต่อกลับ และดูแลบริการ\nการจองและข้อความถูกเก็บในฐานข้อมูลของผู้ให้บริการ ไม่จัดเก็บข้อมูลบัตรชำระเงิน\nชื่อแรกและรีวิวจะเผยแพร่เมื่อผู้เขียนยินยอมและเจ้าหน้าที่อนุมัติ\nแผนทริปและรายการโปรดบันทึกในอุปกรณ์ของคุณ คุกกี้หลังบ้านใช้เฉพาะการเข้าสู่ระบบ\nติดต่อผู้ดูแลเพื่อขอเข้าถึง แก้ไข หรือลบข้อมูลตามช่องทางติดต่อของเว็บไซต์\nฉบับโครงการ: เจ้าของต้องกำหนดผู้ควบคุมข้อมูล ระยะเวลาเก็บรักษา และช่องทางใช้สิทธิให้ครบก่อนเปิดบริการจริง'],terms:['เงื่อนไขบริการ','การส่งแบบฟอร์มเป็นคำขอ ยังไม่ถือเป็นการยืนยันบริการ ต้องรอเจ้าหน้าที่ตรวจสอบ\nราคาแสดงเป็นบาทไทย คิดตามหน่วยของแต่ละบริการและเงื่อนไขที่ประกาศ\nรายละเอียดที่รวมและไม่รวมให้ตรวจสอบก่อนส่งคำขอ\nยังไม่มีการออกตั๋วเครื่องบิน ยืนยันห้องผ่านผู้ให้บริการภายนอก หรือรับชำระเงินอัตโนมัติ\nไม่ควรส่งข้อมูลบัตรหรือเอกสารอ่อนไหวผ่านช่องหมายเหตุ'],cancel:['นโยบายยกเลิกและคืนเงิน','ตรวจเงื่อนไขของแต่ละบริการในหน้ารายละเอียดก่อนส่งคำขอ\nการยกเลิกให้ติดต่อทีมงานพร้อมเลขคำขอ\nรายการที่ชำระแล้วต้องให้เจ้าหน้าที่ตรวจสอบสิทธิและช่องทางคืนเงิน\nสถานะคืนเงินในเว็บเป็นบันทึกของเจ้าหน้าที่ ไม่ใช่คำสั่งโอนเงินผ่านธนาคาร']};
+document.querySelectorAll('[data-policy]').forEach(b=>b.onclick=()=>{const k=b.dataset.policy,custom=data.content.find(x=>x.type==='policy'&&x.title===policies[k][0]);el('policy-body').innerHTML=`<h2>${esc(policies[k][0])}</h2><p class="policy-copy">${esc(custom?.body||policies[k][1])}</p>`;el('policy-dialog').showModal()});
+for(const id of ['service-query','service-category','service-budget','service-sort','filter-family','filter-access'])el(id).addEventListener('input',render);
+el('clear-filters').onclick=()=>{['service-query','service-category','service-budget'].forEach(id=>el(id).value='');el('service-sort').value='featured';el('filter-family').checked=el('filter-access').checked=false;render()};el('print-plan').onclick=()=>window.print();
+document.addEventListener('travel-search',e=>{const d=e.detail;el('service-query').value=d.destination;el('service-category').value=d.category;render();el('services').scrollIntoView({behavior:'smooth'})});
+el('track-form').onsubmit=async e=>{e.preventDefault();const f=e.target,b=f.querySelector('button'),out=el('track-result');b.disabled=true;out.classList.remove('error');try{const r=await api('booking-status',Object.fromEntries(new FormData(f)));out.textContent=`${r.reference}\n${r.service}\n${r.start} → ${r.end}\n${status[r.status]} · ${payments[r.payment_status]}\nยอด ${thb(r.total)} · ${r.pax} คน`}catch(ex){fail(out,ex)}finally{b.disabled=false}};
+for(const [id,endpoint] of [['contact-form','messages'],['review-form','reviews']])el(id).onsubmit=async e=>{e.preventDefault();const f=e.target,b=f.querySelector('button[type="submit"],button.btn'),out=f.querySelector('.form-result');b.disabled=true;out.classList.remove('error');const d=Object.fromEntries(new FormData(f));d.consent=f.elements.consent.checked;if(d.rating)d.rating=Number(d.rating);try{const r=await api(endpoint,d);out.textContent=r.message;f.reset()}catch(ex){fail(out,ex)}finally{b.disabled=false}};
+async function init(){try{data=await api('public');online=true}catch(ex){if(window.TRAVEL_PREVIEW)data=window.TRAVEL_PREVIEW;else el('service-results').innerHTML='<p class="empty">เชื่อมต่อบริการไม่ได้ เปิดผ่านเซิร์ฟเวอร์ตามคู่มือและลองใหม่</p>'}if(data.destinations)document.dispatchEvent(new CustomEvent('travel-cms',{detail:data}));content();if(data.services.length)render();renderPlan()};init();
+})();
+
+</script>
+<script>document.querySelector('a[href="admin"]').onclick=function(e){e.preventDefault();document.getElementById("policy-body").innerHTML="<h2>เปิดระบบผู้ดูแล</h2><p>ดาวน์โหลด thai-travel-pro.zip แล้วแตกไฟล์ เปิด Terminal ในโฟลเดอร์โปรเจกต์</p><p>1. python server.py init-admin<br>2. python server.py<br>3. เปิด http://localhost:8000/admin</p><p>ไฟล์นี้เป็นตัวอย่างหน้าบ้าน ระบบเข้าสู่ระบบจริงอยู่ในโปรเจกต์พร้อมเซิร์ฟเวอร์ ไม่มีรหัสแอดมินฝังในไฟล์นี้</p>";document.getElementById("policy-dialog").showModal();};</script>
+</body>
+</html>
